@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="fw-bold">Kelola Data Inventaris</h3>
+    <h3 class="fw-bold"> Data Inventaris</h3>
     <div>
         <a href="/data-aset/download-pdf?{{ http_build_query(request()->all()) }}" class="btn btn-outline-success"><i class="bi bi-file-earmark-pdf"></i> Unduh PDF</a>
         <a href="/data-aset/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Inventaris</a>
