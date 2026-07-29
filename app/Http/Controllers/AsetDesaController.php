@@ -19,8 +19,16 @@ class AsetDesaController extends Controller
             });
         }
 
+        if ($request->jenis_aset) {
+            $query->where('jenis_aset', $request->jenis_aset);
+        }
+
         $asetDesa = $query->get();
-        return view('aset-desa.index', compact('asetDesa'));
+
+        // Kategori jenis aset tetap desa (fixed, urut sesuai standar)
+        $jenisAsetList = ['Tanah', 'Jalan dan Irigasi', 'Bangunan'];
+
+        return view('aset-desa.index', compact('asetDesa', 'jenisAsetList'));
     }
 
     public function create()

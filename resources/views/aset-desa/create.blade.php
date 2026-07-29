@@ -19,9 +19,8 @@
             <label class="form-label">Jenis Aset</label>
             <select name="jenis_aset" class="form-select" required>
                 <option value="Tanah">Tanah</option>
-                <option value="Gedung dan Bangunan">Gedung dan Bangunan</option>
-                <option value="Kendaraan">Kendaraan</option>
-                <option value="Jalan">Jalan</option>
+                <option value="Jalan dan Irigasi">Jalan dan Irigasi</option>
+                <option value="Bangunan">Bangunan</option>
             </select>
         </div>
         <div class="col-md-6">

@@ -19,7 +19,7 @@
         <div class="col-md-6">
             <label class="form-label">Jenis Aset</label>
             <select name="jenis_aset" class="form-select" required>
-                @foreach(['Tanah','Gedung dan Bangunan','Kendaraan','Jalan'] as $j)
+               @foreach(['Tanah','Jalan dan Irigasi','Bangunan'] as $j)
                     <option value="{{ $j }}" {{ $aset->jenis_aset == $j ? 'selected' : '' }}>{{ $j }}</option>
                 @endforeach
             </select>

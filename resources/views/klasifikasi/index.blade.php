@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold mb-0">Klasifikasi Kondisi Aset</h3>
+    <h3 class="fw-bold mb-0">Klasifikasi Kondisi Inventaris</h3>
     <a href="/klasifikasi/riwayat-lengkap" class="btn btn-outline-success"><i class="bi bi-clock-history"></i> Riwayat Lengkap</a>
 </div>
 

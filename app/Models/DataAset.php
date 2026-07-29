@@ -10,11 +10,6 @@ class DataAset extends Model
     protected $primaryKey = 'id_aset';
     protected $guarded = [];
 
-    public function kategori()
-{
-    return $this->belongsTo(KategoriAset::class, 'id_kategori', 'id_kategori');
-}
-
 public function lokasi()
 {
     return $this->belongsTo(Lokasi::class, 'id_lokasi', 'id_lokasi');

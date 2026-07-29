@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Pembelian Aset')
+@section('title', 'Pembelian Inventaris')
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="fw-bold">Data Pembelian Aset</h3>
+    <h3 class="fw-bold">Data Pembelian Inventaris</h3>
     <a href="/pembelian/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Pembelian</a>
 </div>
 

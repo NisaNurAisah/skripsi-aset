@@ -8,9 +8,29 @@
 </div>
 
 <div class="card stat-card p-3 mb-3">
-    <form action="/data-aset-desa" method="GET">
-        <input type="text" name="search" class="form-control" placeholder="Cari nama atau kode aset... " value="{{ request('search') }}">
+    <form action="/data-aset-desa" method="GET" class="row g-2 align-items-end">
+        <div class="col-md-6">
+            <label class="form-label mb-1">Cari</label>
+            <input type="text" name="search" class="form-control" placeholder="Cari nama atau kode aset..." value="{{ request('search') }}">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label mb-1">Jenis Aset</label>
+            <select name="jenis_aset" class="form-select">
+                <option value="">Data Aset</option>
+                @foreach($jenisAsetList as $jenis)
+                    <option value="{{ $jenis }}" {{ request('jenis_aset') == $jenis ? 'selected' : '' }}>
+                        Data {{ $jenis }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-success w-100">Filter</button>
+        </div>
     </form>
+    @if(request('search') || request('jenis_aset'))
+        <a href="/data-aset-desa" class="btn btn-sm btn-outline-secondary mt-2">Reset Filter</a>
+    @endif
 </div>
 
 <div class="card stat-card p-3">

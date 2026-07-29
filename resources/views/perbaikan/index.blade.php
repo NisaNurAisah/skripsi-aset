@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="fw-bold">Perbaikan Aset</h3>
+    <h3 class="fw-bold">Perbaikan Inventaris</h3>
     @if(session('role') == 'Admin')
     <a href="/perbaikan/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Perbaikan</a>
     @endif

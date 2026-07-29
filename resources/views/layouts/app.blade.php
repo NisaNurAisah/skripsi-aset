@@ -85,8 +85,8 @@
                         <a class="nav-link {{ request()->is('data-latih*') ? 'active' : '' }}" href="/data-latih">Data Latih KNN</a>
                         <a class="nav-link {{ request()->is('klasifikasi*') ? 'active' : '' }}" href="/klasifikasi">Klasifikasi Kondisi</a>
                         @endif
-                        <a class="nav-link {{ request()->is('perbaikan*') ? 'active' : '' }}" href="/perbaikan">Perbaikan Aset</a>
-                        <a class="nav-link {{ request()->is('penghapusan*') ? 'active' : '' }}" href="/penghapusan">Penghapusan Aset</a>
+                        <a class="nav-link {{ request()->is('perbaikan*') ? 'active' : '' }}" href="/perbaikan">Perbaikan Inventaris</a>
+                        <a class="nav-link {{ request()->is('penghapusan*') ? 'active' : '' }}" href="/penghapusan">Penghapusan Inventaris</a>
                         @if(session('role') == 'Admin')
                         <a class="nav-link {{ request()->is('pembelian*') ? 'active' : '' }}" href="/pembelian">Kelola Data Pembelian</a>
                         @endif
