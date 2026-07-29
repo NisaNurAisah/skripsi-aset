@@ -32,19 +32,11 @@
 </div>
 
 <div class="row g-3 mb-4">
-    <div class="col-md-7">
+    <div class="col-md-12">
         <div class="card stat-card p-3">
             <h6 class="fw-bold mb-3">Distribusi Kondisi Aset</h6>
             <div style="height: 250px;">
                 <canvas id="chartKondisi"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-5">
-        <div class="card stat-card p-3">
-            <h6 class="fw-bold mb-3">Distribusi Kategori Aset</h6>
-            <div style="height: 250px;">
-                <canvas id="chartKategori"></canvas>
             </div>
         </div>
     </div>
@@ -85,21 +77,6 @@ new Chart(document.getElementById('chartKondisi'), {
         responsive: true,
         maintainAspectRatio: false,
         plugins: { legend: { display: false } }
-    }
-});
-
-new Chart(document.getElementById('chartKategori'), {
-    type: 'pie',
-    data: {
-        labels: [@foreach($kategoriData as $k) '{{ $k->jenis_kategori }}', @endforeach],
-        datasets: [{
-            data: [@foreach($kategoriData as $k) {{ $k->data_aset_count }}, @endforeach],
-            backgroundColor: ['#0d6efd', '#198754', '#ffc107', '#6f42c1', '#fd7e14']
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false
     }
 });
 </script>

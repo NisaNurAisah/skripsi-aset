@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembelian;
 use App\Models\DataAset;
-use App\Models\KategoriAset;
 use App\Models\Lokasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,9 +18,8 @@ class PembelianController extends Controller
 
     public function create()
     {
-        $kategori = KategoriAset::all();
         $lokasi = Lokasi::all();
-        return view('pembelian.create', compact('kategori', 'lokasi'));
+        return view('pembelian.create', compact('lokasi'));
     }
 
     public function store(Request $request)
@@ -29,7 +27,6 @@ class PembelianController extends Controller
         $request->validate([
             'kode_aset' => 'required|unique:data_aset,kode_aset',
             'nama_aset' => 'required',
-            'id_kategori' => 'required',
             'id_lokasi' => 'required',
             'tahun_perolehan' => 'required|date',
             'jumlah_pembelian' => 'required|numeric|min:1',
@@ -44,7 +41,6 @@ class PembelianController extends Controller
             $dataAset = [
                 'kode_aset' => $request->kode_aset,
                 'nama_aset' => $request->nama_aset,
-                'id_kategori' => $request->id_kategori,
                 'id_lokasi' => $request->id_lokasi,
                 'jenis_aset' => $request->jenis_aset,
                 'intensitas_penggunaan' => $request->intensitas_penggunaan,

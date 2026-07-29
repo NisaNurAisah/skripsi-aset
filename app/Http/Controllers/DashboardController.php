@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\DataAset;
 use App\Models\KlasifikasiKondisiAset;
-use App\Models\KategoriAset;
 
 class DashboardController extends Controller
 {
@@ -19,9 +18,6 @@ class DashboardController extends Controller
         $rusakRingan = DataAset::where('kondisi_aset', 'Rusak Ringan')->count();
         $rusakBerat = DataAset::where('kondisi_aset', 'Rusak Berat')->count();
 
-        // Distribusi kategori (buat pie chart)
-        $kategoriData = KategoriAset::withCount('dataAset')->get();
-
         // Aktivitas terbaru dari hasil klasifikasi
        $aktivitasTerbaru = KlasifikasiKondisiAset::orderBy('created_at', 'desc')
         ->limit(5)
@@ -29,7 +25,7 @@ class DashboardController extends Controller
 
         return view('dashboard', compact(
             'totalAset', 'kondisiBaik', 'rusakRingan', 'rusakBerat',
-            'kategoriData', 'aktivitasTerbaru'
+            'aktivitasTerbaru'
         ));
     }
 }

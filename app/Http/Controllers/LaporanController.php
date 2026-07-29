@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataAset;
-use App\Models\KategoriAset;
 use App\Models\LaporanInventaris;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -12,11 +11,8 @@ class LaporanController extends Controller
 {
     protected function getFilteredData(Request $request)
     {
-        $query = DataAset::with(['kategori', 'lokasi']);
+        $query = DataAset::with(['lokasi']);
 
-        if ($request->id_kategori) {
-            $query->where('id_kategori', $request->id_kategori);
-        }
         if ($request->kondisi_aset) {
             $query->where('kondisi_aset', $request->kondisi_aset);
         }
@@ -33,7 +29,6 @@ class LaporanController extends Controller
     public function index(Request $request)
     {
         $dataAset = $this->getFilteredData($request);
-        $kategori = KategoriAset::all();
 
         $tahunTersedia = DataAset::selectRaw('YEAR(tahun_perolehan) as tahun')
             ->distinct()->orderBy('tahun', 'desc')->pluck('tahun');
@@ -45,7 +40,7 @@ class LaporanController extends Controller
             'rusak_berat' => $dataAset->where('kondisi_aset', 'Rusak Berat')->count(),
         ];
 
-        return view('laporan.index', compact('dataAset', 'kategori', 'tahunTersedia', 'summary'));
+        return view('laporan.index', compact('dataAset', 'tahunTersedia', 'summary'));
     }
 
     public function cetak(Request $request)

@@ -22,9 +22,7 @@ class DataLatihController extends Controller
 
     public function create()
 {
-    $dataAset = DataAset::whereHas('kategori', function($q) {
-        $q->where('jenis_kategori', 'Bergerak');
-    })->get();
+    $dataAset = DataAset::all();
 
     return view('data-latih.create', compact('dataAset'));
 }
@@ -34,9 +32,7 @@ class DataLatihController extends Controller
     $data = [];
 
 if ($request->mode == 'aset' && $request->id_aset) {
-    $aset = DataAset::whereHas('kategori', function($q) {
-        $q->where('jenis_kategori', 'Bergerak');
-    })->findOrFail($request->id_aset);
+    $aset = DataAset::findOrFail($request->id_aset);
 
     if (!$aset->kondisi_aset) {
         return back()->withErrors(['id_aset' => 'Aset ini belum memiliki kondisi. Silakan klasifikasikan terlebih dahulu, atau pilih mode Input Manual.'])->withInput();

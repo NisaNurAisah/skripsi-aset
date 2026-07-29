@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="fw-bold"> Data Inventaris</h3>
+    <h3 class="fw-bold">Data Inventaris</h3>
     <div>
         <a href="/data-aset/download-pdf?{{ http_build_query(request()->all()) }}" class="btn btn-outline-success"><i class="bi bi-file-earmark-pdf"></i> Unduh PDF</a>
         <a href="/data-aset/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Inventaris</a>
@@ -35,61 +35,65 @@
 </div>
 
 <div class="card stat-card p-3">
-    <table class="table table-striped align-middle">
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Kode</th>
-                <th>Nama Inventaris</th>
-                <th>Jenis Inventaris</th>
-                <th>Lokasi</th>
-                <th>Jumlah</th>
-                <th>Tahun Perolehan</th>
-                <th>Intensitas</th>
-                <th>Kondisi</th>
-                <th>Foto</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($dataAset as $aset)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $aset->kode_aset }}</td>
-                <td>{{ $aset->nama_aset }}</td>
-                <td>{{ $aset->jenis_aset }}</td>
-                <td>{{ $aset->lokasi->nama_lokasi ?? '-' }}</td>
-                <td>{{ $aset->jumlah_aset }}</td>
-                <td>{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}</td>
-                <td>{{ $aset->intensitas_penggunaan ?? '-' }}</td>
-                <td>
-                    @if($aset->kondisi_aset)
-                        <span class="badge bg-{{ $aset->kondisi_aset == 'Baik' ? 'success' : ($aset->kondisi_aset == 'Rusak Ringan' ? 'warning' : 'danger') }}">
-                            {{ $aset->kondisi_aset }}
-                        </span>
-                    @else
-                        <span class="badge bg-secondary">Belum diketahui</span>
-                    @endif
-                </td>
-                <td>
-                    @if($aset->gambar_aset)
-                        <img src="/storage/{{ $aset->gambar_aset }}" style="height:50px; width:50px; object-fit:cover; border-radius:6px;">
-                    @else
-                        <span class="text-muted small">-</span>
-                    @endif
-                </td>
-                <td>
-                    <a href="/data-aset/{{ $aset->id_aset }}/edit" class="btn btn-sm btn-outline-primary">Edit</a>
-                    <form action="/data-aset/{{ $aset->id_aset }}" method="POST" class="d-inline">
-                        @csrf @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-            @empty
-            <tr><td colspan="11" class="text-center text-muted">Belum ada data inventaris.</td></tr>
-            @endforelse
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Kode</th>
+                    <th>Nama Inventaris</th>
+                    <th>Jenis Inventaris</th>
+                    <th>Lokasi</th>
+                    <th>Jumlah</th>
+                    <th>Tahun Perolehan</th>
+                    <th>Nilai Perolehan</th>
+                    <th>Intensitas</th>
+                    <th>Kondisi</th>
+                    <th>Foto</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($dataAset as $aset)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $aset->kode_aset }}</td>
+                    <td>{{ $aset->nama_aset }}</td>
+                    <td>{{ $aset->jenis_aset }}</td>
+                    <td>{{ $aset->lokasi->nama_lokasi ?? '-' }}</td>
+                    <td>{{ $aset->jumlah_aset }}</td>
+                    <td>{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}</td>
+                    <td>Rp {{ number_format($aset->nilai_perolehan, 0, ',', '.') }}</td>
+                    <td>{{ $aset->intensitas_penggunaan ?? '-' }}</td>
+                    <td>
+                        @if($aset->kondisi_aset)
+                            <span class="badge bg-{{ $aset->kondisi_aset == 'Baik' ? 'success' : ($aset->kondisi_aset == 'Rusak Ringan' ? 'warning' : 'danger') }}">
+                                {{ $aset->kondisi_aset }}
+                            </span>
+                        @else
+                            <span class="badge bg-secondary">Belum diketahui</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if($aset->gambar_aset)
+                            <img src="/storage/{{ $aset->gambar_aset }}" style="height:50px; width:50px; object-fit:cover; border-radius:6px;">
+                        @else
+                            <span class="text-muted small">-</span>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="/data-aset/{{ $aset->id_aset }}/edit" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <form action="/data-aset/{{ $aset->id_aset }}" method="POST" class="d-inline">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+                @empty
+                <tr><td colspan="12" class="text-center text-muted">Belum ada data inventaris.</td></tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection

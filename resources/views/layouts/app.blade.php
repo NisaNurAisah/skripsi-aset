@@ -33,6 +33,7 @@
         .sidebar .nav-link .bi-chevron-down { transition: transform 0.2s ease; font-size: 12px; }
         .sidebar .nav-link[aria-expanded="true"] .bi-chevron-down { transform: rotate(180deg); }
         .topbar { background-color: #ffffff; border-bottom: 1px solid #e5e7eb; }
+        .flex-grow-1 { min-width: 0; }
         .stat-card { border: none; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: box-shadow 0.2s ease; }
         .stat-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.09); }
         h3.fw-bold { color: #1a2e22; letter-spacing: -0.3px; }
@@ -43,8 +44,16 @@
         .btn-outline-success:hover { background-color: #1a5f3f; border-color: #1a5f3f; }
         .btn-outline-primary, .btn-outline-secondary, .btn-outline-danger { border-radius: 8px; }
         .badge { font-weight: 500; padding: 6px 10px; border-radius: 6px; }
-        .table thead th { background-color: #f8f9fa; font-size: 13px; text-transform: uppercase; letter-spacing: 0.4px; color: #6b7280; border-bottom: 2px solid #e5e7eb; }
-        .table td { font-size: 14.5px; vertical-align: middle; }
+        .table thead th {
+            background-color: #f8f9fa;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #6b7280;
+            border-bottom: 2px solid #e5e7eb;
+            white-space: nowrap;
+        }
+        .table td { font-size: 14.5px; vertical-align: middle; white-space: nowrap; }
         .form-control, .form-select { border-radius: 8px; border-color: #d1d5db; }
         .form-control:focus, .form-select:focus { border-color: #1a5f3f; box-shadow: 0 0 0 0.2rem rgba(26,95,63,0.15); }
     </style>
@@ -60,18 +69,7 @@
 
                 @if(session('role') == 'Admin')
                 <a class="nav-link {{ request()->is('data-pengguna*') ? 'active' : '' }}" href="/data-pengguna"><i class="bi bi-people me-2"></i>Data Pengguna</a>
-
-                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#submenuAsetDesa" role="button" aria-expanded="{{ request()->is('data-aset-desa*') ? 'true' : 'false' }}">
-                    <span><i class="bi bi-geo-alt me-2"></i>Kelola Data Aset</span>
-                    <i class="bi bi-chevron-down"></i>
-                </a>
-                <div class="collapse submenu {{ request()->is('data-aset-desa*') ? 'show' : '' }}" id="submenuAsetDesa">
-                    <nav class="nav flex-column">
-                        <a class="nav-link {{ request('kategori') == 'tanah' ? 'active' : '' }}" href="/data-aset-desa?kategori=tanah">Tanah</a>
-                        <a class="nav-link {{ request('kategori') == 'kendaraan-bangunan' ? 'active' : '' }}" href="/data-aset-desa?kategori=kendaraan-bangunan">Kendaraan dan Bangunan</a>
-                        <a class="nav-link {{ request('kategori') == 'jalan-irigasi' ? 'active' : '' }}" href="/data-aset-desa?kategori=jalan-irigasi">Jalan dan Irigasi</a>
-                    </nav>
-                </div>
+                <a class="nav-link {{ request()->is('data-aset-desa*') ? 'active' : '' }}" href="/data-aset-desa"><i class="bi bi-geo-alt me-2"></i>Kelola Data Aset</a>
                 @endif
 
                 <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#submenuInventaris" role="button" aria-expanded="{{ request()->is('data-aset*','data-latih*','klasifikasi*','perbaikan*','penghapusan*','pembelian*') ? 'true' : 'false' }}">
@@ -84,12 +82,10 @@
                         <a class="nav-link {{ request()->is('data-aset*') ? 'active' : '' }}" href="/data-aset">Data Inventaris</a>
                         <a class="nav-link {{ request()->is('data-latih*') ? 'active' : '' }}" href="/data-latih">Data Latih KNN</a>
                         <a class="nav-link {{ request()->is('klasifikasi*') ? 'active' : '' }}" href="/klasifikasi">Klasifikasi Kondisi</a>
+                        <a class="nav-link {{ request()->is('pembelian*') ? 'active' : '' }}" href="/pembelian">Pembelian Inventaris</a>
                         @endif
                         <a class="nav-link {{ request()->is('perbaikan*') ? 'active' : '' }}" href="/perbaikan">Perbaikan Inventaris</a>
                         <a class="nav-link {{ request()->is('penghapusan*') ? 'active' : '' }}" href="/penghapusan">Penghapusan Inventaris</a>
-                        @if(session('role') == 'Admin')
-                        <a class="nav-link {{ request()->is('pembelian*') ? 'active' : '' }}" href="/pembelian">Kelola Data Pembelian</a>
-                        @endif
                     </nav>
                 </div>
 

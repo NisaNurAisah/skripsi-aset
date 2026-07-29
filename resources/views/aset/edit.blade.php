@@ -44,10 +44,10 @@
             <label class="form-label">Tahun Perolehan</label>
             <input type="date" name="tahun_perolehan" value="{{ $aset->tahun_perolehan }}" class="form-control" required>
         </div>
-        <div class="col-md-6">
-            <label class="form-label">Nilai Perolehan (Rp)</label>
-            <input type="number" name="nilai_perolehan" value="{{ $aset->nilai_perolehan }}" step="0.01" class="form-control" required>
-        </div>
+      <div class="col-md-6">
+    <label class="form-label">Tahun Perolehan</label>
+    <input type="number" name="tahun_perolehan" value="{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}" class="form-control" min="2000" max="{{ date('Y') }}" required>
+</div>
         <div class="col-md-6">
             <label class="form-label">Jumlah Inventaris</label>
             <input type="number" name="jumlah_aset" value="{{ $aset->jumlah_aset }}" class="form-control" required>

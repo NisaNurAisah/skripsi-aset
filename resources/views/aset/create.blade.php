@@ -4,6 +4,16 @@
 @section('content')
 <h3 class="fw-bold mb-4 text-center">Tambah Data Inventaris</h3>
 
+@if($errors->any())
+    <div class="alert alert-danger mx-auto" style="max-width:600px;">
+        <ul class="mb-0">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="card stat-card p-4 mx-auto" style="max-width:600px;">
     <form action="/data-aset" method="POST" class="row g-3" enctype="multipart/form-data">
         @csrf
@@ -41,9 +51,9 @@
             </select>
         </div>
         <div class="col-md-6">
-            <label class="form-label">Tahun Perolehan</label>
-            <input type="date" name="tahun_perolehan" class="form-control" required>
-        </div>
+    <label class="form-label">Tahun Perolehan</label>
+    <input type="number" name="tahun_perolehan" class="form-control" placeholder="Contoh: 2020" min="2000" max="{{ date('Y') }}" required>
+</div>
         <div class="col-md-6">
             <label class="form-label">Nilai Perolehan (Rp)</label>
             <input type="number" name="nilai_perolehan" step="0.01" class="form-control" required>

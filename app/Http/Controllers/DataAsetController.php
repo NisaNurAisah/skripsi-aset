@@ -33,28 +33,29 @@ class DataAsetController extends Controller
         return view('aset.create', compact('lokasi'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'kode_aset' => 'required|unique:data_aset,kode_aset',
-            'nama_aset' => 'required',
-            'jenis_aset' => 'required',
-            'id_lokasi' => 'required',
-            'tahun_perolehan' => 'required|date',
-            'nilai_perolehan' => 'required|numeric',
-            'gambar_aset' => 'nullable|image|max:2048',
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'kode_aset' => 'required|unique:data_aset,kode_aset',
+        'nama_aset' => 'required',
+        'jenis_aset' => 'required',
+        'id_lokasi' => 'required',
+        'tahun_perolehan' => 'required|integer|min:2000|max:' . date('Y'),
+        'nilai_perolehan' => 'required|numeric',
+        'gambar_aset' => 'nullable|image|max:2048',
+    ]);
 
-        $data = $request->except('gambar_aset');
+    $data = $request->except('gambar_aset');
+    $data['tahun_perolehan'] = $request->tahun_perolehan . '-01-01';
 
-        if ($request->hasFile('gambar_aset')) {
-            $data['gambar_aset'] = $request->file('gambar_aset')->store('aset', 'public');
-        }
-
-        DataAset::create($data);
-
-        return redirect('/data-aset')->with('success', 'Data inventaris berhasil ditambahkan');
+    if ($request->hasFile('gambar_aset')) {
+        $data['gambar_aset'] = $request->file('gambar_aset')->store('aset', 'public');
     }
+
+    DataAset::create($data);
+
+    return redirect('/data-aset')->with('success', 'Data inventaris berhasil ditambahkan');
+}
 
     public function edit($id_aset)
     {
@@ -63,19 +64,19 @@ class DataAsetController extends Controller
         return view('aset.edit', compact('aset', 'lokasi'));
     }
 
-    public function update(Request $request, $id_aset)
-    {
-        $aset = DataAset::findOrFail($id_aset);
-        $data = $request->except('gambar_aset');
+   public function update(Request $request, $id_aset)
+{
+    $aset = DataAset::findOrFail($id_aset);
+    $data = $request->except('gambar_aset');
+    $data['tahun_perolehan'] = $request->tahun_perolehan . '-01-01';
 
-        if ($request->hasFile('gambar_aset')) {
-            $data['gambar_aset'] = $request->file('gambar_aset')->store('aset', 'public');
-        }
-
-        $aset->update($data);
-        return redirect('/data-aset')->with('success', 'Data inventaris berhasil diperbarui');
+    if ($request->hasFile('gambar_aset')) {
+        $data['gambar_aset'] = $request->file('gambar_aset')->store('aset', 'public');
     }
 
+    $aset->update($data);
+    return redirect('/data-aset')->with('success', 'Data inventaris berhasil diperbarui');
+}
     public function destroy($id_aset)
     {
         DataAset::findOrFail($id_aset)->delete();

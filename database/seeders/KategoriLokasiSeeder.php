@@ -13,13 +13,6 @@ class KategoriLokasiSeeder extends Seeder
      */
     public function run(): void
 {
-    DB::table('kategori_aset')->insert([
-        ['jenis_kategori' => 'Elektronik', 'kode_kategori' => 'ELK'],
-        ['jenis_kategori' => 'Furnitur', 'kode_kategori' => 'FUR'],
-        ['jenis_kategori' => 'Peralatan Kantor', 'kode_kategori' => 'PRK'],
-        ['jenis_kategori' => 'Perlengkapan Kantor', 'kode_kategori' => 'PLK'],
-    ]);
-
     DB::table('lokasi')->insert([
         ['nama_lokasi' => 'Ruang Kepala Desa', 'keterangan' => null],
         ['nama_lokasi' => 'Ruang Sekretariat', 'keterangan' => null],
