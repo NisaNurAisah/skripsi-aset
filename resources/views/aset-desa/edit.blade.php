@@ -19,8 +19,17 @@
         <div class="col-md-6">
             <label class="form-label">Jenis Aset</label>
             <select name="jenis_aset" class="form-select" required>
-               @foreach(['Tanah','Jalan dan Irigasi','Bangunan'] as $j)
+               @foreach(['Tanah','Jalan dan Irigasi','Bangunan','Sawah'] as $j)
                     <option value="{{ $j }}" {{ $aset->jenis_aset == $j ? 'selected' : '' }}>{{ $j }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Cara Perolehan</label>
+            <select name="cara_perolehan" class="form-select">
+                <option value="">- Pilih -</option>
+                @foreach(['Pembelian','Hibah','Bantuan Pemerintah','Swadaya Masyarakat','Lainnya'] as $c)
+                    <option value="{{ $c }}" {{ $aset->cara_perolehan == $c ? 'selected' : '' }}>{{ $c }}</option>
                 @endforeach
             </select>
         </div>

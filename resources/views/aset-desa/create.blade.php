@@ -18,9 +18,21 @@
         <div class="col-md-6">
             <label class="form-label">Jenis Aset</label>
             <select name="jenis_aset" class="form-select" required>
-                <option value="Tanah">Tanah</option>
-                <option value="Jalan dan Irigasi">Jalan dan Irigasi</option>
-                <option value="Bangunan">Bangunan</option>
+                <option value="Tanah" {{ request('jenis_aset') == 'Tanah' ? 'selected' : '' }}>Tanah</option>
+                <option value="Jalan dan Irigasi" {{ request('jenis_aset') == 'Jalan dan Irigasi' ? 'selected' : '' }}>Jalan dan Irigasi</option>
+                <option value="Bangunan" {{ request('jenis_aset') == 'Bangunan' ? 'selected' : '' }}>Bangunan</option>
+                <option value="Sawah" {{ request('jenis_aset') == 'Sawah' ? 'selected' : '' }}>Sawah</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Cara Perolehan</label>
+            <select name="cara_perolehan" class="form-select">
+                <option value="">- Pilih -</option>
+                <option value="Pembelian">Pembelian</option>
+                <option value="Hibah">Hibah</option>
+                <option value="Bantuan Pemerintah">Bantuan Pemerintah</option>
+                <option value="Swadaya Masyarakat">Swadaya Masyarakat</option>
+                <option value="Lainnya">Lainnya</option>
             </select>
         </div>
         <div class="col-md-6">

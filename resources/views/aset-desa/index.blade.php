@@ -3,27 +3,22 @@
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="fw-bold">Kelola Data Aset</h3>
-    <a href="/data-aset-desa/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Aset</a>
+    <h3 class="fw-bold">{{ request('jenis_aset') ?: 'Data Aset' }}</h3>
+    <div>
+        <a href="/data-aset-desa/download-pdf?{{ http_build_query(request()->only('search','jenis_aset')) }}" class="btn btn-outline-success"><i class="bi bi-file-earmark-pdf"></i> Cetak PDF</a>
+        <a href="/data-aset-desa/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Aset</a>
+    </div>
 </div>
 
 <div class="card stat-card p-3 mb-3">
     <form action="/data-aset-desa" method="GET" class="row g-2 align-items-end">
-        <div class="col-md-6">
+        <div class="col-md-10">
             <label class="form-label mb-1">Cari</label>
             <input type="text" name="search" class="form-control" placeholder="Cari nama atau kode aset..." value="{{ request('search') }}">
         </div>
-        <div class="col-md-4">
-            <label class="form-label mb-1">Jenis Aset</label>
-            <select name="jenis_aset" class="form-select">
-                <option value="">Data Aset</option>
-                @foreach($jenisAsetList as $jenis)
-                    <option value="{{ $jenis }}" {{ request('jenis_aset') == $jenis ? 'selected' : '' }}>
-                        Data {{ $jenis }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
+        @if(request('jenis_aset'))
+            <input type="hidden" name="jenis_aset" value="{{ request('jenis_aset') }}">
+        @endif
         <div class="col-md-2">
             <button type="submit" class="btn btn-success w-100">Filter</button>
         </div>
@@ -41,6 +36,7 @@
                 <th>Kode</th>
                 <th>Nama Aset</th>
                 <th>Jenis Aset</th>
+                <th>Cara Perolehan</th>
                 <th>Lokasi</th>
                 <th>Jumlah</th>
                 <th>Tahun Perolehan</th>
@@ -56,6 +52,7 @@
                 <td>{{ $aset->kode_aset }}</td>
                 <td>{{ $aset->nama_aset }}</td>
                 <td>{{ $aset->jenis_aset }}</td>
+                <td>{{ $aset->cara_perolehan ?? '-' }}</td>
                 <td>{{ $aset->lokasi->nama_lokasi ?? '-' }}</td>
                 <td>{{ $aset->jumlah_aset }}</td>
                 <td>{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}</td>
@@ -84,7 +81,7 @@
                 </td>
             </tr>
             @empty
-            <tr><td colspan="10" class="text-center text-muted">Belum ada data aset desa.</td></tr>
+            <tr><td colspan="11" class="text-center text-muted">Belum ada data aset desa.</td></tr>
             @endforelse
         </tbody>
     </table>

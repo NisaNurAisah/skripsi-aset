@@ -89,12 +89,16 @@ Route::middleware('admin')->group(function () {
     Route::delete('/pembelian/{id_pembelian}', [PembelianController::class, 'destroy']);
 
     // Aset Desa
-    Route::get('/data-aset-desa', [AsetDesaController::class, 'index']);
+   Route::get('/data-aset-desa', [AsetDesaController::class, 'index']);
     Route::get('/data-aset-desa/create', [AsetDesaController::class, 'create']);
     Route::post('/data-aset-desa', [AsetDesaController::class, 'store']);
+    Route::get('/data-aset-desa/download-pdf', [AsetDesaController::class, 'downloadPdf']);
     Route::get('/data-aset-desa/{id_aset_desa}/edit', [AsetDesaController::class, 'edit']);
     Route::put('/data-aset-desa/{id_aset_desa}', [AsetDesaController::class, 'update']);
     Route::delete('/data-aset-desa/{id_aset_desa}', [AsetDesaController::class, 'destroy']);
+
+    Route::get('/pengadaan-aset', [AsetDesaController::class, 'pengadaan']);
+    Route::get('/pengadaan-aset/download-pdf', [AsetDesaController::class, 'downloadPdfPengadaan']);
 });
 
 

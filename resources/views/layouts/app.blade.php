@@ -69,17 +69,30 @@
 
                 @if(session('role') == 'Admin')
                 <a class="nav-link {{ request()->is('data-pengguna*') ? 'active' : '' }}" href="/data-pengguna"><i class="bi bi-people me-2"></i>Data Pengguna</a>
-                <a class="nav-link {{ request()->is('data-aset-desa*') ? 'active' : '' }}" href="/data-aset-desa"><i class="bi bi-geo-alt me-2"></i>Kelola Data Aset</a>
+
+                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#submenuAset" role="button" aria-expanded="{{ request()->is('data-aset-desa*') ? 'true' : 'false' }}">
+                    <span><i class="bi bi-geo-alt me-2"></i>Kelola Data Aset</span>
+                    <i class="bi bi-chevron-down"></i>
+                </a>
+                <div class="collapse submenu {{ request()->is('data-aset-desa*') ? 'show' : '' }}" id="submenuAset">
+            <nav class="nav flex-column">
+                <a class="nav-link {{ request()->is('data-aset-desa*') && !request('jenis_aset') ? 'active' : '' }}" href="/data-aset-desa">Data Aset</a>
+                <a class="nav-link {{ request()->is('data-aset-desa*') && request('jenis_aset') == 'Tanah' ? 'active' : '' }}" href="/data-aset-desa?jenis_aset=Tanah">Data Tanah</a>
+                <a class="nav-link {{ request()->is('data-aset-desa*') && request('jenis_aset') == 'Jalan dan Irigasi' ? 'active' : '' }}" href="/data-aset-desa?jenis_aset=Jalan+dan+Irigasi">Data Jalan dan Irigasi</a>
+                <a class="nav-link {{ request()->is('data-aset-desa*') && request('jenis_aset') == 'Bangunan' ? 'active' : '' }}" href="/data-aset-desa?jenis_aset=Bangunan">Data Bangunan</a>
+                <a class="nav-link {{ request()->is('data-aset-desa*') && request('jenis_aset') == 'Sawah' ? 'active' : '' }}" href="/data-aset-desa?jenis_aset=Sawah">Data Sawah</a>
+            </nav>
+        </div>
                 @endif
 
-                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#submenuInventaris" role="button" aria-expanded="{{ request()->is('data-aset*','data-latih*','klasifikasi*','perbaikan*','penghapusan*','pembelian*') ? 'true' : 'false' }}">
+                <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#submenuInventaris" role="button" aria-expanded="{{ request()->is('data-aset','data-aset/*','data-latih*','klasifikasi*','perbaikan*','penghapusan*','pembelian*') ? 'true' : 'false' }}">
                     <span><i class="bi bi-box me-2"></i>Kelola Data Inventaris</span>
                     <i class="bi bi-chevron-down"></i>
                 </a>
-                <div class="collapse submenu {{ request()->is('data-aset*','data-latih*','klasifikasi*','perbaikan*','penghapusan*','pembelian*') ? 'show' : '' }}" id="submenuInventaris">
+                <div class="collapse submenu {{ request()->is('data-aset','data-aset/*','data-latih*','klasifikasi*','perbaikan*','penghapusan*','pembelian*') ? 'show' : '' }}" id="submenuInventaris">
                     <nav class="nav flex-column">
                         @if(session('role') == 'Admin')
-                        <a class="nav-link {{ request()->is('data-aset*') ? 'active' : '' }}" href="/data-aset">Data Inventaris</a>
+                        <a class="nav-link {{ request()->is('data-aset','data-aset/*') ? 'active' : '' }}" href="/data-aset">Data Inventaris</a>
                         <a class="nav-link {{ request()->is('data-latih*') ? 'active' : '' }}" href="/data-latih">Data Latih KNN</a>
                         <a class="nav-link {{ request()->is('klasifikasi*') ? 'active' : '' }}" href="/klasifikasi">Klasifikasi Kondisi</a>
                         <a class="nav-link {{ request()->is('pembelian*') ? 'active' : '' }}" href="/pembelian">Pembelian Inventaris</a>
