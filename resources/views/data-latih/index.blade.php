@@ -1,0 +1,54 @@
+@extends('layouts.app')
+@section('title', 'Data Latih KNN')
+
+@section('content')
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="fw-bold">Data Latih KNN</h3>
+    <a href="/data-latih/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Data Latih</a>
+</div>
+
+<div class="card stat-card p-3 mb-3">
+    <form action="/data-latih" method="GET">
+        <input type="text" name="search" class="form-control" placeholder="Cari jenis aset... (tekan Enter)" value="{{ request('search') }}">
+    </form>
+</div>
+
+<div class="card stat-card p-3">
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Jenis Aset</th>
+                <th>Intensitas Penggunaan</th>
+                <th>Usia Aset (tahun)</th>
+                <th>Label Kondisi</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($dataLatih as $d)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $d->jenis_aset }}</td>
+                <td>{{ $d->intensitas_penggunaan }}</td>
+                <td>{{ $d->usia_aset }}</td>
+                <td>
+                    <span class="badge bg-{{ $d->label_kondisi == 'Baik' ? 'success' : ($d->label_kondisi == 'Rusak Ringan' ? 'warning' : 'danger') }}">
+                        {{ $d->label_kondisi }}
+                    </span>
+                </td>
+                <td>
+                    <a href="/data-latih/{{ $d->id_data_latih }}/edit" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <form action="/data-latih/{{ $d->id_data_latih }}" method="POST" class="d-inline">
+                        @csrf @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            @empty
+            <tr><td colspan="6" class="text-center text-muted">Belum ada data latih.</td></tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+@endsection
