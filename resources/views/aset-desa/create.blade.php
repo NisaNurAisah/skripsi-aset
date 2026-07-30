@@ -35,14 +35,14 @@
                 <option value="Swadaya Masyarakat">Swadaya Masyarakat</option>
                 <option value="Dana Desa">Dana Desa</option>
                 <option value="DBH">DBH</option>
-                <option value="Bamprov">Bamprov</option>
+                <option value="Banprov">Banprov</option>
                 <option value="Pemekaran">Pemekaran</option>
                 <option value="Lainnya">Lainnya</option>
             </select>
         </div>
         <div class="col-md-6">
             <label class="form-label">Tahun Perolehan</label>
-            <input type="date" name="tahun_perolehan" class="form-control" required>
+            <input type="number" name="tahun_perolehan" class="form-control" placeholder="Contoh: 2020" min="1900" max="{{ date('Y') }}" required>
         </div>
         <div class="col-md-6">
             <label class="form-label">Nilai Perolehan (Rp)</label>

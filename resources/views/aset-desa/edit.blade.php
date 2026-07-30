@@ -28,14 +28,13 @@
             <label class="form-label">Cara Perolehan</label>
             <select name="cara_perolehan" class="form-select">
                 <option value="">- Pilih -</option>
-                @foreach(['Pembelian','Hibah','Bantuan Pemerintah','Swadaya Masyarakat','Dana Desa','DBH','Bamprov','Pemekaran','Lainnya'] as $c)
-                    <option value="{{ $c }}" {{ $aset->cara_perolehan == $c ? 'selected' : '' }}>{{ $c }}</option>
+                @foreach(['Pembelian','Hibah','Bantuan Pemerintah','Swadaya Masyarakat','Dana Desa','DBH','Banprov','Pemekaran','Lainnya'] as $c)
                 @endforeach
             </select>
         </div>
         <div class="col-md-6">
             <label class="form-label">Tahun Perolehan</label>
-            <input type="date" name="tahun_perolehan" value="{{ $aset->tahun_perolehan }}" class="form-control" required>
+            <input type="number" name="tahun_perolehan" value="{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}" class="form-control" min="1900" max="{{ date('Y') }}" required>
         </div>
         <div class="col-md-6">
             <label class="form-label">Nilai Perolehan (Rp)</label>

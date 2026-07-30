@@ -35,83 +35,87 @@
 </div>
 
 <div class="card stat-card p-3">
-    <table class="table table-striped align-middle">
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Kode</th>
-                <th>Nama Aset</th>
-                <th>Jenis Aset</th>
-                <th>Cara Perolehan</th>
-                <th>Tahun Perolehan</th>
-                <th>Foto</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($asetDesa as $aset)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $aset->kode_aset }}</td>
-                <td>{{ $aset->nama_aset }}</td>
-                <td>{{ $aset->jenis_aset }}</td>
-                <td>{{ $aset->cara_perolehan ?? '-' }}</td>
-                <td>{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}</td>
-                <td>
-                    @if($aset->gambar_aset)
-                        <img src="/storage/{{ $aset->gambar_aset }}" style="height:50px; width:50px; object-fit:cover; border-radius:6px;">
-                    @else
-                        <span class="text-muted small">-</span>
-                    @endif
-                </td>
-                <td>
-                    <a href="/data-aset-desa/{{ $aset->id_aset_desa }}/edit" class="btn btn-sm btn-outline-primary">Edit</a>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $aset->id_aset_desa }}">Detail</button>
-                    <form action="/data-aset-desa/{{ $aset->id_aset_desa }}" method="POST" class="d-inline">
-                        @csrf @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-
-            <div class="modal fade" id="detailModal{{ $aset->id_aset_desa }}" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Detail Aset - {{ $aset->nama_aset }}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table table-sm table-borderless mb-0">
-                                <tr><th style="width:180px">Kode Aset</th><td>{{ $aset->kode_aset }}</td></tr>
-                                <tr><th>Jenis Aset</th><td>{{ $aset->jenis_aset }}</td></tr>
-                                <tr><th>NUP</th><td>{{ $aset->nup ?? '-' }}</td></tr>
-                                @if(in_array($aset->jenis_aset, ['Tanah','Sawah','Jalan dan Irigasi','Bangunan']))
-                                <tr><th>{{ $aset->jenis_aset == 'Jalan dan Irigasi' ? 'Ukuran' : 'Luas' }}</th><td>{{ $aset->ukuran_luas ?? '-' }}</td></tr>
-                                @endif
-                                @if(in_array($aset->jenis_aset, ['Jalan dan Irigasi','Bangunan']))
-                                <tr><th>{{ $aset->jenis_aset == 'Bangunan' ? 'Tipe Bangunan' : 'Type' }}</th><td>{{ $aset->tipe ?? '-' }}</td></tr>
-                                @endif
-                                @if(in_array($aset->jenis_aset, ['Tanah','Sawah']))
-                                <tr><th>Atas Hak/Bukti Kepemilikan</th><td>{{ $aset->atas_hak ?? '-' }}</td></tr>
-                                @endif
-                                @if($aset->jenis_aset == 'Kendaraan')
-                                <tr><th>Merk/Type</th><td>{{ $aset->merk_type ?? '-' }}</td></tr>
-                                <tr><th>Nomor Identitas</th><td>{{ $aset->nomor_identitas ?? '-' }}</td></tr>
-                                <tr><th>Kondisi</th><td>{{ $aset->kondisi_aset ?? 'Belum diketahui' }}</td></tr>
-                                @endif
-                                <tr><th>Cara Perolehan</th><td>{{ $aset->cara_perolehan ?? '-' }}</td></tr>
-                                <tr><th>Tahun Perolehan</th><td>{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}</td></tr>
-                                <tr><th>Nilai Perolehan</th><td>Rp {{ number_format($aset->nilai_perolehan, 0, ',', '.') }}</td></tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @empty
-            <tr><td colspan="8" class="text-center text-muted">Belum ada data aset desa.</td></tr>
-            @endforelse
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Kode</th>
+                    <th>Nama Aset</th>
+                    <th>Jenis Aset</th>
+                    <th>Cara Perolehan</th>
+                    <th>Tahun Perolehan</th>
+                    <th>Foto</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($asetDesa as $aset)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $aset->kode_aset }}</td>
+                    <td>{{ $aset->nama_aset }}</td>
+                    <td>{{ $aset->jenis_aset }}</td>
+                    <td>{{ $aset->cara_perolehan ?? '-' }}</td>
+                    <td>{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}</td>
+                    <td>
+                        @if($aset->gambar_aset)
+                            <img src="/storage/{{ $aset->gambar_aset }}" style="height:50px; width:50px; object-fit:cover; border-radius:6px;">
+                        @else
+                            <span class="text-muted small">-</span>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="/data-aset-desa/{{ $aset->id_aset_desa }}/edit" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $aset->id_aset_desa }}">Detail</button>
+                        <form action="/data-aset-desa/{{ $aset->id_aset_desa }}" method="POST" class="d-inline">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+                @empty
+                <tr><td colspan="8" class="text-center text-muted">Belum ada data aset desa.</td></tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
 </div>
+
+@foreach($asetDesa as $aset)
+<div class="modal fade" id="detailModal{{ $aset->id_aset_desa }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detail Aset - {{ $aset->nama_aset }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-sm table-borderless mb-0">
+                    <tr><th style="width:180px">Kode Aset</th><td>{{ $aset->kode_aset }}</td></tr>
+                    <tr><th>Jenis Aset</th><td>{{ $aset->jenis_aset }}</td></tr>
+                    <tr><th>NUP</th><td>{{ $aset->nup ?? '-' }}</td></tr>
+                    @if(in_array($aset->jenis_aset, ['Tanah','Sawah','Jalan dan Irigasi','Bangunan']))
+                    <tr><th>{{ $aset->jenis_aset == 'Jalan dan Irigasi' ? 'Ukuran' : 'Luas' }}</th><td>{{ $aset->ukuran_luas ?? '-' }}</td></tr>
+                    @endif
+                    @if(in_array($aset->jenis_aset, ['Jalan dan Irigasi','Bangunan']))
+                    <tr><th>{{ $aset->jenis_aset == 'Bangunan' ? 'Tipe Bangunan' : 'Type' }}</th><td>{{ $aset->tipe ?? '-' }}</td></tr>
+                    @endif
+                    @if(in_array($aset->jenis_aset, ['Tanah','Sawah']))
+                    <tr><th>Atas Hak/Bukti Kepemilikan</th><td>{{ $aset->atas_hak ?? '-' }}</td></tr>
+                    @endif
+                    @if($aset->jenis_aset == 'Kendaraan')
+                    <tr><th>Merk/Type</th><td>{{ $aset->merk_type ?? '-' }}</td></tr>
+                    <tr><th>Nomor Identitas</th><td>{{ $aset->nomor_identitas ?? '-' }}</td></tr>
+                    <tr><th>Kondisi</th><td>{{ $aset->kondisi_aset ?? 'Belum diketahui' }}</td></tr>
+                    @endif
+                    <tr><th>Cara Perolehan</th><td>{{ $aset->cara_perolehan ?? '-' }}</td></tr>
+                    <tr><th>Tahun Perolehan</th><td>{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}</td></tr>
+                    <tr><th>Nilai Perolehan</th><td>Rp {{ number_format($aset->nilai_perolehan, 0, ',', '.') }}</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 @endsection

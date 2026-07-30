@@ -44,7 +44,7 @@ class AsetDesaController extends Controller
             'nama_aset' => 'required',
             'jenis_aset' => 'required',
             'cara_perolehan' => 'nullable',
-            'tahun_perolehan' => 'required|date',
+            'tahun_perolehan' => 'required|integer|min:1900|max:' . date('Y'),
             'nilai_perolehan' => 'required|numeric',
             'nup' => 'nullable',
             'ukuran_luas' => 'nullable',
@@ -57,6 +57,8 @@ class AsetDesaController extends Controller
         ]);
 
         $data = $request->except('gambar_aset');
+        $data = $request->except('gambar_aset');
+        $data['tahun_perolehan'] = $request->tahun_perolehan . '-01-01';
 
         if ($request->hasFile('gambar_aset')) {
             $data['gambar_aset'] = $request->file('gambar_aset')->store('aset-desa', 'public');
@@ -117,7 +119,7 @@ class AsetDesaController extends Controller
 
     public static function caraPerolehanList()
     {
-        return ['Pembelian', 'Hibah', 'Bantuan Pemerintah', 'Swadaya Masyarakat', 'Dana Desa', 'DBH', 'Bamprov', 'Pemekaran', 'Lainnya'];
+        return ['Pembelian', 'Hibah', 'Bantuan Pemerintah', 'Swadaya Masyarakat', 'Dana Desa', 'DBH', 'Banprov', 'Pemekaran', 'Lainnya'];
     }
 
     public function pengadaan(Request $request)
