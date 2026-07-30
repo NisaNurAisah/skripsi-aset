@@ -4,7 +4,21 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h3 class="fw-bold">Data Latih KNN</h3>
-    <a href="/data-latih/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Data Latih</a>
+    <div>
+        <form action="/data-latih/reset-generate" method="POST" class="d-inline">
+            @csrf
+            <button type="submit" class="btn btn-outline-danger" onclick="return confirm('PERHATIAN: Ini akan MENGHAPUS SEMUA data latih yang ada saat ini (termasuk yang diinput manual), lalu generate ulang dari awal berdasarkan Data Aset yang sudah punya kondisi. Yakin lanjut?')">
+                <i class="bi bi-arrow-repeat"></i> Reset &amp; Generate Ulang
+            </button>
+        </form>
+        <form action="/data-latih/generate-otomatis" method="POST" class="d-inline">
+            @csrf
+            <button type="submit" class="btn btn-outline-success" onclick="return confirm('Generate data latih otomatis dari semua Data Aset yang sudah punya kondisi? Aset yang sudah ada di Data Latih tidak akan diduplikasi.')">
+                <i class="bi bi-magic"></i> Generate Otomatis
+            </button>
+        </form>
+        <a href="/data-latih/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Data Latih</a>
+    </div>
 </div>
 
 <div class="card stat-card p-3 mb-3">

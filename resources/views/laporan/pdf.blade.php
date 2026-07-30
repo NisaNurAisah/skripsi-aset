@@ -31,7 +31,7 @@
                 <th>No.</th>
                 <th>Kode</th>
                 <th>Nama Aset</th>
-                <th>Kategori</th>
+                <th>Jenis Aset</th>
                 <th>Lokasi</th>
                 <th>Jumlah</th>
                 <th>Tahun Perolehan</th>
@@ -44,7 +44,7 @@
                 <td>{{ $i + 1 }}</td>
                 <td>{{ $aset->kode_aset }}</td>
                 <td>{{ $aset->nama_aset }}</td>
-                <td>{{ $aset->kategori->jenis_kategori ?? '-' }}</td>
+                <td>{{ $aset->jenis_aset->jenis_aset ?? '-' }}</td>
                 <td>{{ $aset->lokasi->nama_lokasi ?? '-' }}</td>
                 <td>{{ $aset->jumlah_aset }}</td>
                 <td>{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}</td>

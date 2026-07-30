@@ -8,15 +8,15 @@
 </div>
 
 <div class="card stat-card p-4 mb-4">
-    <h6 class="fw-bold mb-3">Input Data Uji Baru</h6>
+    <h6 class="fw-bold mb-3">Input Data Inventaris</h6>
     <form action="/klasifikasi" method="POST" class="row g-3">
         @csrf
         <div class="col-md-4">
-            <label class="form-label">Nama Aset</label>
-            <input type="text" name="nama_aset_uji" class="form-control" placeholder="Contoh: Komputer Acer" required>
+            <label class="form-label">Nama Inventaris</label>
+            <input type="text" name="nama_aset_uji" class="form-control" placeholder="" required>
         </div>
         <div class="col-md-4">
-            <label class="form-label">Jenis Aset</label>
+            <label class="form-label">Jenis Inventaris</label>
             <select name="jenis_aset_uji" class="form-select" required>
                 <option value="Elektronik">Elektronik</option>
                 <option value="Furnitur">Furnitur</option>
@@ -26,7 +26,7 @@
         </div>
         <div class="col-md-4">
             <label class="form-label">Tahun Perolehan</label>
-            <input type="number" name="tahun_perolehan_uji" class="form-control" placeholder="Contoh: 2018" min="2000" max="{{ date('Y') }}" required>
+            <input type="number" name="tahun_perolehan_uji" class="form-control" placeholder="" min="2000" max="{{ date('Y') }}" required>
         </div>
         <div class="col-md-4">
             <label class="form-label">Intensitas Penggunaan</label>
@@ -49,8 +49,8 @@
             <tr>
                 <th>No.</th>
                 <th>Tanggal</th>
-                <th>Nama Aset</th>
-                <th>Jenis Aset</th>
+                <th>Nama Inventaris</th>
+                <th>Jenis Inventaris</th>
                 <th>Usia</th>
                 <th>Intensitas</th>
                 <th>Hasil</th>
@@ -62,10 +62,10 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $r->tanggal_klasifikasi }}</td>
-                <td>{{ $r->nama_aset_uji }}</td>
-                <td>{{ $r->jenis_aset_uji }}</td>
-                <td>{{ $r->usia_aset_uji }} tahun</td>
-                <td>{{ $r->intensitas_penggunaan_uji }}</td>
+                <td>{{ $r->nama_aset_inventaris }}</td>
+                <td>{{ $r->jenis_aset_inventaris }}</td>
+                <td>{{ $r->usia_aset_inventaris }} tahun</td>
+                <td>{{ $r->intensitas_penggunaan_inventaris }}</td>
                 <td>
                     <span class="badge bg-{{ $r->hasil_klasifikasi == 'Baik' ? 'success' : ($r->hasil_klasifikasi == 'Rusak Ringan' ? 'warning' : 'danger') }}">
                         {{ $r->hasil_klasifikasi }}

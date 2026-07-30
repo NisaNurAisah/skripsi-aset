@@ -11,7 +11,7 @@
 
 <div class="card stat-card p-3 mb-3">
     <form action="/penghapusan" method="GET">
-        <input type="text" name="search" class="form-control" placeholder="Cari nama aset atau alasan penghapusan... (tekan Enter)" value="{{ request('search') }}">
+        <input type="text" name="search" class="form-control" placeholder="Cari nama inventaris atau alasan penghapusan..." value="{{ request('search') }}">
     </form>
 </div>
 
@@ -20,7 +20,7 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Aset</th>
+                <th>Nama Inventaris</th>
                 <th>Alasan</th>
                 <th>Tanggal</th>
                 <th>Status</th>

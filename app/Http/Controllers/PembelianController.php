@@ -25,10 +25,8 @@ class PembelianController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_aset' => 'required|unique:data_aset,kode_aset',
             'nama_aset' => 'required',
             'id_lokasi' => 'required',
-            'tahun_perolehan' => 'required|date',
             'jumlah_pembelian' => 'required|numeric|min:1',
             'total_harga' => 'required|numeric',
             'tanggal_pembelian' => 'required|date',
@@ -39,12 +37,11 @@ class PembelianController extends Controller
             $nilaiPerolehanPerUnit = $request->total_harga / $request->jumlah_pembelian;
 
             $dataAset = [
-                'kode_aset' => $request->kode_aset,
                 'nama_aset' => $request->nama_aset,
                 'id_lokasi' => $request->id_lokasi,
                 'jenis_aset' => $request->jenis_aset,
                 'intensitas_penggunaan' => $request->intensitas_penggunaan,
-                'tahun_perolehan' => $request->tahun_perolehan,
+                'tahun_perolehan' => $request->tanggal_pembelian,
                 'nilai_perolehan' => $nilaiPerolehanPerUnit,
                 'jumlah_aset' => $request->jumlah_pembelian,
                 'status_aset' => 'Aktif',

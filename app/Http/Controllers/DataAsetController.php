@@ -10,22 +10,20 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class DataAsetController extends Controller
 {
     public function index(Request $request)
-    {
-        $query = DataAset::with('lokasi');
+{
+    $query = DataAset::with('lokasi');
 
-        if ($request->search) {
-            $query->where(function($q) use ($request) {
-                $q->where('nama_aset', 'like', '%' . $request->search . '%')
-                  ->orWhere('kode_aset', 'like', '%' . $request->search . '%');
-            });
-        }
-        if ($request->kondisi_aset) {
-            $query->where('kondisi_aset', $request->kondisi_aset);
-        }
-
-        $dataAset = $query->get();
-        return view('aset.index', compact('dataAset'));
+    if ($request->search) {
+        $query->where('nama_aset', 'like', '%' . $request->search . '%');
     }
+
+    if ($request->kondisi_aset) {
+        $query->where('kondisi_aset', $request->kondisi_aset);
+    }
+
+    $dataAset = $query->get();
+    return view('aset.index', compact('dataAset'));
+}
 
     public function create()
     {
@@ -97,11 +95,8 @@ class DataAsetController extends Controller
         $query = DataAset::with('lokasi');
 
         if ($request->search) {
-            $query->where(function($q) use ($request) {
-                $q->where('nama_aset', 'like', '%' . $request->search . '%')
-                  ->orWhere('kode_aset', 'like', '%' . $request->search . '%');
-            });
-        }
+    $query->where('nama_aset', 'like', '%' . $request->search . '%');
+}
         if ($request->kondisi_aset) {
             $query->where('kondisi_aset', $request->kondisi_aset);
         }

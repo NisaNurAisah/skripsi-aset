@@ -2,13 +2,13 @@
 @section('title', 'Tambah Penghapusan')
 
 @section('content')
-<h3 class="fw-bold mb-4">Tambah Data Penghapusan</h3>
+<h3 class="fw-bold mb-4 text-center">Tambah Data Penghapusan</h3>
 
-<div class="card stat-card p-4" style="max-width:600px;">
+<div class="card stat-card p-4 mx-auto" style="max-width:600px;">
     <form action="/penghapusan" method="POST" class="row g-3">
         @csrf
         <div class="col-md-12">
-            <label class="form-label">Aset</label>
+            <label class="form-label">Nama Inventaris</label>
             <select name="id_aset" class="form-select" required>
                 @foreach($dataAset as $a)
                     <option value="{{ $a->id_aset }}">{{ $a->nama_aset }}</option>

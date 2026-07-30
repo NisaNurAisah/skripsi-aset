@@ -61,11 +61,13 @@ Route::middleware('admin')->group(function () {
     Route::get('/data-latih', [DataLatihController::class, 'index']);
     Route::get('/data-latih/create', [DataLatihController::class, 'create']);
     Route::post('/data-latih', [DataLatihController::class, 'store']);
+    Route::post('/data-latih/generate-otomatis', [DataLatihController::class, 'generateOtomatis']);
+    Route::post('/data-latih/reset-generate', [DataLatihController::class, 'resetGenerate']);
     Route::get('/data-latih/{id_data_latih}/edit', [DataLatihController::class, 'edit']);
     Route::put('/data-latih/{id_data_latih}', [DataLatihController::class, 'update']);
     Route::delete('/data-latih/{id_data_latih}', [DataLatihController::class, 'destroy']);
 
-    // Klasifikasi
+        // Klasifikasi
    Route::get('/klasifikasi', [KlasifikasiController::class, 'index']);
     Route::get('/klasifikasi/riwayat', [KlasifikasiController::class, 'riwayat']);
     Route::post('/klasifikasi', [KlasifikasiController::class, 'klasifikasikan']);

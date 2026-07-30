@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
+    {
+        Schema::dropIfExists('kategori_aset');
+    }
+
+    public function down(): void
     {
         Schema::create('kategori_aset', function (Blueprint $table) {
             $table->id('id_kategori');
@@ -17,13 +19,5 @@ return new class extends Migration
             $table->string('kode_kategori', 50);
             $table->timestamps();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('kategori_aset');
     }
 };

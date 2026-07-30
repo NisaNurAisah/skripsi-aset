@@ -12,7 +12,7 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Aset</th>
+                <th>Nama Inventaris</th>
                 <th>Tanggal</th>
                 <th>Jumlah</th>
                 <th>Total Harga</th>
