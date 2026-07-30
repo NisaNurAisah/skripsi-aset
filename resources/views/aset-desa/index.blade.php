@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="fw-bold">{{ request('jenis_aset') ?: 'Data Aset' }}</h3>
+    <h3 class="fw-bold">{{ request('jenis_aset') ? 'Data Aset ' . request('jenis_aset') : 'Data Aset' }}</h3>
     <div>
         <a href="/data-aset-desa/download-pdf?{{ http_build_query(request()->only('search','jenis_aset')) }}" class="btn btn-outline-success"><i class="bi bi-file-earmark-pdf"></i> Cetak PDF</a>
         <a href="/data-aset-desa/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Aset</a>

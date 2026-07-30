@@ -99,6 +99,9 @@ Route::middleware('admin')->group(function () {
 
     Route::get('/pengadaan-aset', [AsetDesaController::class, 'pengadaan']);
     Route::get('/pengadaan-aset/download-pdf', [AsetDesaController::class, 'downloadPdfPengadaan']);
+
+    Route::get('/laporan-aset', [AsetDesaController::class, 'laporan']);
+    Route::get('/laporan-aset/download-pdf', [AsetDesaController::class, 'downloadPdfLaporan']);
 });
 
 

@@ -18,10 +18,6 @@
     <form action="/data-aset" method="POST" class="row g-3" enctype="multipart/form-data">
         @csrf
         <div class="col-md-6">
-            <label class="form-label">Kode Inventaris</label>
-            <input type="text" name="kode_aset" class="form-control" required>
-        </div>
-        <div class="col-md-6">
             <label class="form-label">Nama Inventaris</label>
             <input type="text" name="nama_aset" class="form-control" required>
         </div>
@@ -34,6 +30,10 @@
                 <option value="Perlengkapan Kantor">Perlengkapan Kantor</option>
             </select>
         </div>
+        <div class="col-md-6">
+    <label class="form-label">Merk</label>
+    <input type="text" name="merk" class="form-control" placeholder="Contoh: Epson, Acer, dll">
+</div>
         <div class="col-md-6">
             <label class="form-label">Intensitas Penggunaan</label>
             <select name="intensitas_penggunaan" class="form-select">

@@ -81,6 +81,8 @@
                 <a class="nav-link {{ request()->is('data-aset-desa*') && request('jenis_aset') == 'Jalan dan Irigasi' ? 'active' : '' }}" href="/data-aset-desa?jenis_aset=Jalan+dan+Irigasi">Data Jalan dan Irigasi</a>
                 <a class="nav-link {{ request()->is('data-aset-desa*') && request('jenis_aset') == 'Bangunan' ? 'active' : '' }}" href="/data-aset-desa?jenis_aset=Bangunan">Data Bangunan</a>
                 <a class="nav-link {{ request()->is('data-aset-desa*') && request('jenis_aset') == 'Sawah' ? 'active' : '' }}" href="/data-aset-desa?jenis_aset=Sawah">Data Sawah</a>
+                <a class="nav-link {{ request()->is('pengadaan-aset*') ? 'active' : '' }}" href="/pengadaan-aset">Pengadaan Aset</a>
+                <a class="nav-link {{ request()->is('laporan-aset*') ? 'active' : '' }}" href="/laporan-aset">Laporan Aset</a>
             </nav>
         </div>
                 @endif
@@ -99,10 +101,9 @@
                         @endif
                         <a class="nav-link {{ request()->is('perbaikan*') ? 'active' : '' }}" href="/perbaikan">Perbaikan Inventaris</a>
                         <a class="nav-link {{ request()->is('penghapusan*') ? 'active' : '' }}" href="/penghapusan">Penghapusan Inventaris</a>
+                         <a class="nav-link {{ request()->is('laporan') ? 'active' : '' }}" href="/laporan">Laporan Inventaris</a>
                     </nav>
                 </div>
-
-                <a class="nav-link {{ request()->is('laporan*') ? 'active' : '' }}" href="/laporan"><i class="bi bi-file-earmark-text me-2"></i>Lihat Laporan Inventaris</a>
 
                 <form action="/logout" method="POST">
                     @csrf

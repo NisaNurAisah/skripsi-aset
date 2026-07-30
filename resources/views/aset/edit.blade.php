@@ -9,10 +9,6 @@
         @csrf
         @method('PUT')
         <div class="col-md-6">
-            <label class="form-label">Kode Inventaris</label>
-            <input type="text" name="kode_aset" value="{{ $aset->kode_aset }}" class="form-control" required>
-        </div>
-        <div class="col-md-6">
             <label class="form-label">Nama Inventaris</label>
             <input type="text" name="nama_aset" value="{{ $aset->nama_aset }}" class="form-control" required>
         </div>
@@ -23,6 +19,10 @@
                     <option value="{{ $j }}" {{ $aset->jenis_aset == $j ? 'selected' : '' }}>{{ $j }}</option>
                 @endforeach
             </select>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Merk</label>
+            <input type="text" name="merk" value="{{ $aset->merk }}" class="form-control" placeholder="Contoh: Epson, Acer, dll">
         </div>
         <div class="col-md-6">
             <label class="form-label">Intensitas Penggunaan</label>
@@ -42,12 +42,12 @@
         </div>
         <div class="col-md-6">
             <label class="form-label">Tahun Perolehan</label>
-            <input type="date" name="tahun_perolehan" value="{{ $aset->tahun_perolehan }}" class="form-control" required>
+            <input type="number" name="tahun_perolehan" value="{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}" class="form-control" min="2000" max="{{ date('Y') }}" required>
         </div>
-      <div class="col-md-6">
-    <label class="form-label">Tahun Perolehan</label>
-    <input type="number" name="tahun_perolehan" value="{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}" class="form-control" min="2000" max="{{ date('Y') }}" required>
-</div>
+        <div class="col-md-6">
+            <label class="form-label">Nilai Perolehan (Rp)</label>
+            <input type="number" name="nilai_perolehan" value="{{ $aset->nilai_perolehan }}" step="0.01" class="form-control" required>
+        </div>
         <div class="col-md-6">
             <label class="form-label">Jumlah Inventaris</label>
             <input type="number" name="jumlah_aset" value="{{ $aset->jumlah_aset }}" class="form-control" required>

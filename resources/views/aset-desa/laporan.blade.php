@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Laporan Inventaris')
+@section('title', 'Laporan Aset Desa')
 
 @section('content')
-<h3 class="fw-bold mb-4">Lihat Laporan Inventaris</h3>
+<h3 class="fw-bold mb-4">Laporan Aset Desa</h3>
 
 <div class="card stat-card p-3 mb-4">
-    <form action="/laporan" method="GET" class="row g-3 align-items-end">
+    <form action="/laporan-aset" method="GET" class="row g-3 align-items-end">
         <div class="col-md-4">
             <label class="form-label">Periode (Tahun)</label>
             <select name="periode" class="form-select">
@@ -16,13 +16,13 @@
             </select>
         </div>
         <div class="col-md-4">
-            <label class="form-label">Jenis Inventaris</label>
+            <label class="form-label">Jenis Aset</label>
             <select name="jenis_aset" class="form-select">
                 <option value="">Semua Jenis</option>
-                <option value="Elektronik" {{ request('jenis_aset') == 'Elektronik' ? 'selected' : '' }}>Elektronik</option>
-                <option value="Furnitur" {{ request('jenis_aset') == 'Furnitur' ? 'selected' : '' }}>Furnitur</option>
-                <option value="Peralatan Kantor" {{ request('jenis_aset') == 'Peralatan Kantor' ? 'selected' : '' }}>Peralatan Kantor</option>
-                <option value="Perlengkapan Kantor" {{ request('jenis_aset') == 'Perlengkapan Kantor' ? 'selected' : '' }}>Perlengkapan Kantor</option>
+                <option value="Tanah" {{ request('jenis_aset') == 'Tanah' ? 'selected' : '' }}>Tanah</option>
+                <option value="Bangunan" {{ request('jenis_aset') == 'Bangunan' ? 'selected' : '' }}>Bangunan</option>
+                <option value="Jalan dan Irigasi" {{ request('jenis_aset') == 'Jalan dan Irigasi' ? 'selected' : '' }}>Jalan dan Irigasi</option>
+                <option value="Sawah" {{ request('jenis_aset') == 'Sawah' ? 'selected' : '' }}>Sawah</option>
             </select>
         </div>
         <div class="col-md-4">
@@ -36,45 +36,14 @@
         </div>
         <div class="col-md-12">
             <button type="submit" class="btn btn-success">Terapkan Filter</button>
-            <a href="/laporan" class="btn btn-outline-secondary">Reset</a>
+            <a href="/laporan-aset" class="btn btn-outline-secondary">Reset</a>
         </div>
     </form>
 </div>
 
-@if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
-
-<div class="row g-3 mb-4">
-    <div class="col-md-3">
-        <div class="card stat-card p-3 text-center">
-            <div class="text-muted">Total Inventaris</div>
-            <div class="fs-2 fw-bold">{{ $summary['total'] }}</div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card stat-card p-3 text-center">
-            <div class="text-muted">Kondisi Baik</div>
-            <div class="fs-2 fw-bold text-success">{{ $summary['baik'] }}</div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card stat-card p-3 text-center">
-            <div class="text-muted">Rusak Ringan</div>
-            <div class="fs-2 fw-bold text-warning">{{ $summary['rusak_ringan'] }}</div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card stat-card p-3 text-center">
-            <div class="text-muted">Rusak Berat</div>
-            <div class="fs-2 fw-bold text-danger">{{ $summary['rusak_berat'] }}</div>
-        </div>
-    </div>
-</div>
-
 <div class="card stat-card p-3">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 class="fw-bold mb-0">Detail Laporan Inventaris Aset Desa Hegarmanah</h5>
+        <h5 class="fw-bold mb-0">Detail Laporan Aset Desa Hegarmanah</h5>
         <span class="text-muted">Periode: {{ request('periode') ?? 'Semua Periode' }}</span>
     </div>
     <div class="table-responsive">
@@ -83,8 +52,8 @@
                 <tr>
                     <th>No.</th>
                     <th>Kode</th>
-                    <th>Nama Inventaris</th>
-                    <th>Jenis Inventaris</th>
+                    <th>Nama Aset</th>
+                    <th>Jenis Aset</th>
                     <th>Lokasi</th>
                     <th>Jumlah</th>
                     <th>Tahun Perolehan</th>
@@ -92,7 +61,7 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($dataAset as $aset)
+                @forelse($asetDesa as $aset)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $aset->kode_aset }}</td>
@@ -112,13 +81,7 @@
 </div>
 
 <div class="mt-3">
-    <form action="/laporan/cetak" method="POST" class="d-inline">
-        @csrf
-        <input type="hidden" name="periode" value="{{ request('periode') }}">
-        <input type="hidden" name="jenis_aset" value="{{ request('jenis_aset') }}">
-        <button type="submit" class="btn btn-outline-success"><i class="bi bi-clock-history"></i> Catat Riwayat Cetak</button>
-    </form>
-    <a href="/laporan/download-pdf?{{ http_build_query(request()->all()) }}" class="btn btn-success">
+    <a href="/laporan-aset/download-pdf?{{ http_build_query(request()->all()) }}" class="btn btn-success">
         <i class="bi bi-file-earmark-pdf"></i> Unduh PDF
     </a>
 </div>
