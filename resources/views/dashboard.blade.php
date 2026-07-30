@@ -7,7 +7,7 @@
 <div class="row g-3 mb-4">
     <div class="col-md-3">
         <div class="card stat-card p-3 text-center">
-            <div class="text-muted">Total Aset</div>
+            <div class="text-muted">Total Inventaris</div>
             <div class="fs-2 fw-bold">{{ $totalAset }}</div>
         </div>
     </div>
@@ -34,7 +34,7 @@
 <div class="row g-3 mb-4">
     <div class="col-md-12">
         <div class="card stat-card p-3">
-            <h6 class="fw-bold mb-3">Distribusi Kondisi Aset</h6>
+            <h6 class="fw-bold mb-3">Distribusi Kondisi Inventaris</h6>
             <div style="height: 250px;">
                 <canvas id="chartKondisi"></canvas>
             </div>
@@ -46,7 +46,7 @@
     <h6 class="fw-bold mb-3">Aktivitas Klasifikasi Terbaru</h6>
     <table class="table table-striped">
         <thead>
-            <tr><th>Waktu</th><th>Aset</th><th>Hasil Klasifikasi</th></tr>
+            <tr><th>Waktu</th><th>Inventaris</th><th>Hasil Klasifikasi</th></tr>
         </thead>
         <tbody>
             @forelse($aktivitasTerbaru as $a)

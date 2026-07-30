@@ -79,7 +79,26 @@ class AsetDesaController extends Controller
     public function update(Request $request, $id_aset_desa)
     {
         $aset = AsetDesa::findOrFail($id_aset_desa);
+
+        $request->validate([
+            'kode_aset' => 'required|unique:aset_desa,kode_aset,' . $id_aset_desa . ',id_aset_desa',
+            'nama_aset' => 'required',
+            'jenis_aset' => 'required',
+            'cara_perolehan' => 'nullable',
+            'tahun_perolehan' => 'required|integer|min:1900|max:' . date('Y'),
+            'nilai_perolehan' => 'required|numeric',
+            'nup' => 'nullable',
+            'ukuran_luas' => 'nullable',
+            'tipe' => 'nullable',
+            'atas_hak' => 'nullable',
+            'merk_type' => 'nullable',
+            'nomor_identitas' => 'nullable',
+            'kondisi_aset' => 'nullable',
+            'gambar_aset' => 'nullable|image|max:2048',
+        ]);
+
         $data = $request->except('gambar_aset');
+        $data['tahun_perolehan'] = $request->tahun_perolehan . '-01-01';
 
         if ($request->hasFile('gambar_aset')) {
             $data['gambar_aset'] = $request->file('gambar_aset')->store('aset-desa', 'public');
@@ -112,8 +131,9 @@ class AsetDesaController extends Controller
 
         $asetDesa = $query->get();
         $judul = $request->jenis_aset ? 'DATA ASET DESA - ' . strtoupper($request->jenis_aset) : 'DATA ASET DESA';
+        $filterJenis = $request->jenis_aset;
 
-        $pdf = Pdf::loadView('aset-desa.pdf', compact('asetDesa', 'judul'));
+        $pdf = Pdf::loadView('aset-desa.pdf', compact('asetDesa', 'judul', 'filterJenis'));
         return $pdf->download('Data-Aset-Desa-' . now()->format('Ymd') . '.pdf');
     }
 

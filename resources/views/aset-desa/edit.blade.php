@@ -29,6 +29,7 @@
             <select name="cara_perolehan" class="form-select">
                 <option value="">- Pilih -</option>
                 @foreach(['Pembelian','Hibah','Bantuan Pemerintah','Swadaya Masyarakat','Dana Desa','DBH','Banprov','Pemekaran','Lainnya'] as $c)
+                    <option value="{{ $c }}" {{ $aset->cara_perolehan == $c ? 'selected' : '' }}>{{ $c }}</option>
                 @endforeach
             </select>
         </div>
