@@ -24,10 +24,7 @@
                 <th>Nama Aset</th>
                 <th>Jenis Aset</th>
                 <th>Cara Perolehan</th>
-                <th>Lokasi</th>
-                <th>Jumlah</th>
                 <th>Tahun Perolehan</th>
-                <th>Kondisi</th>
             </tr>
         </thead>
         <tbody>
@@ -38,13 +35,10 @@
                 <td>{{ $aset->nama_aset }}</td>
                 <td>{{ $aset->jenis_aset }}</td>
                 <td>{{ $aset->cara_perolehan ?? '-' }}</td>
-                <td>{{ $aset->lokasi->nama_lokasi ?? '-' }}</td>
-                <td>{{ $aset->jumlah_aset }}</td>
                 <td>{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}</td>
-                <td>{{ $aset->kondisi_aset ?? 'Belum diketahui' }}</td>
             </tr>
             @empty
-            <tr><td colspan="9" style="text-align:center;">Tidak ada data.</td></tr>
+            <tr><td colspan="6" style="text-align:center;">Tidak ada data.</td></tr>
             @endforelse
         </tbody>
     </table>

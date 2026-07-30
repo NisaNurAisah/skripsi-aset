@@ -26,7 +26,7 @@ class AsetDesaController extends Controller
 
         $asetDesa = $query->get();
 
-        $jenisAsetList = ['Tanah', 'Jalan dan Irigasi', 'Bangunan', 'Sawah'];
+        $jenisAsetList = ['Tanah', 'Jalan dan Irigasi', 'Bangunan', 'Sawah', 'Kendaraan'];
 
         return view('aset-desa.index', compact('asetDesa', 'jenisAsetList'));
     }
@@ -44,10 +44,15 @@ class AsetDesaController extends Controller
             'nama_aset' => 'required',
             'jenis_aset' => 'required',
             'cara_perolehan' => 'nullable',
-            'id_lokasi' => 'required',
             'tahun_perolehan' => 'required|date',
             'nilai_perolehan' => 'required|numeric',
-            'jumlah_aset' => 'required|numeric|min:1',
+            'nup' => 'nullable',
+            'ukuran_luas' => 'nullable',
+            'tipe' => 'nullable',
+            'atas_hak' => 'nullable',
+            'merk_type' => 'nullable',
+            'nomor_identitas' => 'nullable',
+            'kondisi_aset' => 'nullable',
             'gambar_aset' => 'nullable|image|max:2048',
         ]);
 
@@ -112,7 +117,7 @@ class AsetDesaController extends Controller
 
     public static function caraPerolehanList()
     {
-        return ['Pembelian', 'Hibah', 'Bantuan Pemerintah', 'Swadaya Masyarakat', 'Lainnya'];
+        return ['Pembelian', 'Hibah', 'Bantuan Pemerintah', 'Swadaya Masyarakat', 'Dana Desa', 'DBH', 'Bamprov', 'Pemekaran', 'Lainnya'];
     }
 
     public function pengadaan(Request $request)
