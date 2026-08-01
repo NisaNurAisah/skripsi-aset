@@ -62,10 +62,10 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $r->tanggal_klasifikasi }}</td>
-                <td>{{ $r->nama_aset_inventaris }}</td>
-                <td>{{ $r->jenis_aset_inventaris }}</td>
-                <td>{{ $r->usia_aset_inventaris }} tahun</td>
-                <td>{{ $r->intensitas_penggunaan_inventaris }}</td>
+                <td>{{ $r->nama_aset_uji }}</td>
+                <td>{{ $r->jenis_aset_uji }}</td>
+                <td>{{ $r->usia_aset_uji }} tahun</td>
+                <td>{{ $r->intensitas_penggunaan_uji }}</td>
                 <td>
                     <span class="badge bg-{{ $r->hasil_klasifikasi == 'Baik' ? 'success' : ($r->hasil_klasifikasi == 'Rusak Ringan' ? 'warning' : 'danger') }}">
                         {{ $r->hasil_klasifikasi }}
