@@ -26,6 +26,13 @@ class PenggunaController extends Controller
             'username' => 'required|unique:pengguna,username',
             'password' => 'required|min:6',
             'role' => 'required',
+        ], [
+            'nama_pengguna.required' => 'Nama pengguna wajib diisi.',
+            'username.required' => 'Username wajib diisi.',
+            'username.unique' => 'Username ini sudah dipakai, coba pakai username lain.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password harus terdiri dari minimal 6 karakter.',
+            'role.required' => 'Role wajib dipilih.',
         ]);
 
         Pengguna::create([

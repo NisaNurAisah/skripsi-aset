@@ -4,13 +4,26 @@
 @section('content')
 <h3 class="fw-bold mb-4 text-center">Edit Data Aset</h3>
 
+@if ($errors->any())
+    <div class="alert alert-danger mx-auto" style="max-width:600px;">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="card stat-card p-4 mx-auto" style="max-width:600px;">
     <form action="/data-aset-desa/{{ $aset->id_aset_desa }}" method="POST" class="row g-3" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="col-md-6">
             <label class="form-label">Kode Aset</label>
-            <input type="text" name="kode_aset" value="{{ $aset->kode_aset }}" class="form-control" required>
+            <input type="text" name="kode_aset" value="{{ old('kode_aset', $aset->kode_aset) }}" class="form-control @error('kode_aset') is-invalid @enderror">
+            @error('kode_aset')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-md-6">
             <label class="form-label">Nama Aset</label>

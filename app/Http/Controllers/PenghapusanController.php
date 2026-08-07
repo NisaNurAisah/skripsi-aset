@@ -9,20 +9,20 @@ use Illuminate\Http\Request;
 class PenghapusanController extends Controller
 {
     public function index(Request $request)
-{
-    $query = Penghapusan::with('aset');
+    {
+        $query = Penghapusan::with('aset');
 
-    if ($request->search) {
-        $query->where(function($q) use ($request) {
-            $q->whereHas('aset', function($q2) use ($request) {
-                $q2->where('nama_aset', 'like', '%' . $request->search . '%');
-            })->orWhere('alasan_penghapusan', 'like', '%' . $request->search . '%');
-        });
+        if ($request->search) {
+            $query->where(function($q) use ($request) {
+                $q->whereHas('aset', function($q2) use ($request) {
+                    $q2->where('nama_aset', 'like', '%' . $request->search . '%');
+                })->orWhere('alasan_penghapusan', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        $penghapusan = $query->get();
+        return view('penghapusan.index', compact('penghapusan'));
     }
-
-    $penghapusan = $query->get();
-    return view('penghapusan.index', compact('penghapusan'));
-}
 
     public function create()
     {
@@ -53,16 +53,22 @@ class PenghapusanController extends Controller
     }
 
     public function approve($id_penghapusan)
-{
-    $penghapusan = Penghapusan::findOrFail($id_penghapusan);
-    $penghapusan->update(['status' => 'Disetujui']);
-    return redirect('/penghapusan')->with('success', 'Penghapusan aset disetujui.');
-}
+    {
+        $penghapusan = Penghapusan::findOrFail($id_penghapusan);
+        $penghapusan->update(['status' => 'Disetujui']);
 
-public function reject($id_penghapusan)
-{
-    $penghapusan = Penghapusan::findOrFail($id_penghapusan);
-    $penghapusan->update(['status' => 'Ditolak']);
-    return redirect('/penghapusan')->with('success', 'Penghapusan aset ditolak.');
-}
+        $aset = $penghapusan->aset;
+        if ($aset && $aset->jumlah_aset > 0) {
+            $aset->decrement('jumlah_aset');
+        }
+
+        return redirect('/penghapusan')->with('success', 'Penghapusan aset disetujui dan stok Data Inventaris berkurang 1 unit.');
+    }
+
+    public function reject($id_penghapusan)
+    {
+        $penghapusan = Penghapusan::findOrFail($id_penghapusan);
+        $penghapusan->update(['status' => 'Ditolak']);
+        return redirect('/penghapusan')->with('success', 'Penghapusan aset ditolak.');
+    }
 }

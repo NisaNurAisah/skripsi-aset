@@ -32,9 +32,9 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Jenis Aset</th>
+                <th>Jenis Inventaris</th>
                 <th>Intensitas Penggunaan</th>
-                <th>Usia Aset (tahun)</th>
+                <th>Usia Inventaris (tahun)</th>
                 <th>Label Kondisi</th>
                 <th>Aksi</th>
             </tr>

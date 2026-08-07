@@ -74,7 +74,7 @@
 
 <div class="card stat-card p-3">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 class="fw-bold mb-0">Detail Laporan Inventaris Aset Desa Hegarmanah</h5>
+        <h5 class="fw-bold mb-0">Detail Laporan Inventaris Desa Hegarmanah</h5>
         <span class="text-muted">Periode: {{ request('periode') ?? 'Semua Periode' }}</span>
     </div>
     <div class="table-responsive">

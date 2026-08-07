@@ -54,6 +54,19 @@ class AsetDesaController extends Controller
             'nomor_identitas' => 'nullable',
             'kondisi_aset' => 'nullable',
             'gambar_aset' => 'nullable|image|max:2048',
+        ], [
+            'kode_aset.required' => 'Kode aset wajib diisi.',
+            'kode_aset.unique' => 'Kode aset ini sudah dipakai, silakan gunakan kode lain.',
+            'nama_aset.required' => 'Nama aset wajib diisi.',
+            'jenis_aset.required' => 'Jenis aset wajib dipilih.',
+            'tahun_perolehan.required' => 'Tahun perolehan wajib diisi.',
+            'tahun_perolehan.integer' => 'Tahun perolehan harus berupa angka.',
+            'tahun_perolehan.min' => 'Tahun perolehan tidak valid.',
+            'tahun_perolehan.max' => 'Tahun perolehan tidak boleh lebih dari tahun sekarang.',
+            'nilai_perolehan.required' => 'Nilai perolehan wajib diisi.',
+            'nilai_perolehan.numeric' => 'Nilai perolehan harus berupa angka.',
+            'gambar_aset.image' => 'Berkas yang diunggah harus berupa gambar.',
+            'gambar_aset.max' => 'Ukuran gambar maksimal 2 MB.',
         ]);
 
         $data = $request->except('gambar_aset');
@@ -95,6 +108,19 @@ class AsetDesaController extends Controller
             'nomor_identitas' => 'nullable',
             'kondisi_aset' => 'nullable',
             'gambar_aset' => 'nullable|image|max:2048',
+        ], [
+            'kode_aset.required' => 'Kode aset wajib diisi.',
+            'kode_aset.unique' => 'Kode aset ini sudah dipakai, silakan gunakan kode lain.',
+            'nama_aset.required' => 'Nama aset wajib diisi.',
+            'jenis_aset.required' => 'Jenis aset wajib dipilih.',
+            'tahun_perolehan.required' => 'Tahun perolehan wajib diisi.',
+            'tahun_perolehan.integer' => 'Tahun perolehan harus berupa angka.',
+            'tahun_perolehan.min' => 'Tahun perolehan tidak valid.',
+            'tahun_perolehan.max' => 'Tahun perolehan tidak boleh lebih dari tahun sekarang.',
+            'nilai_perolehan.required' => 'Nilai perolehan wajib diisi.',
+            'nilai_perolehan.numeric' => 'Nilai perolehan harus berupa angka.',
+            'gambar_aset.image' => 'Berkas yang diunggah harus berupa gambar.',
+            'gambar_aset.max' => 'Ukuran gambar maksimal 2 MB.',
         ]);
 
         $data = $request->except('gambar_aset');

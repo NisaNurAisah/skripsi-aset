@@ -86,7 +86,7 @@
 
     <div class="login-card">
         <div class="icon-box"><i class="bi bi-building"></i></div>
-        <h4>Sistem Inventaris Aset Desa</h4>
+        <h4>Sistem Informasi Pengelolaan Inventaris dan Aset Desa</h4>
         <p class="subtitle">Desa Hegarmanah, Kec. Sukaluyu, Kab. Cianjur</p>
 
         @if($errors->any())

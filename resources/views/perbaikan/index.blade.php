@@ -14,7 +14,7 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Aset</th>
+                <th>Inventaris</th>
                 <th>Deskripsi Kerusakan</th>
                 <th>Tanggal</th>
                 <th>Biaya</th>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KlasifikasiKondisiAset;
+use App\Models\DataLatih;
 use App\Services\KnnService;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -63,13 +64,23 @@ public function riwayatLengkap(Request $request)
             'tahun_perolehan_uji' => 'required|integer',
         ]);
 
+        $nilaiK = 3;
+        $jumlahDataLatih = DataLatih::count();
+
+        if ($jumlahDataLatih < $nilaiK) {
+            return redirect()->back()->withInput()->with(
+                'error',
+                "Data latih belum mencukupi untuk melakukan klasifikasi. Dibutuhkan minimal {$nilaiK} data latih, saat ini baru tersedia {$jumlahDataLatih} data. Silakan tambahkan data latih terlebih dahulu."
+            );
+        }
+
         $usiaAset = (int) date('Y') - (int) $request->tahun_perolehan_uji;
 
         $hasil = $this->knnService->klasifikasi(
             $request->jenis_aset_uji,
             $request->intensitas_penggunaan_uji,
             $usiaAset,
-            3
+            $nilaiK
         );
 
         $klasifikasi = KlasifikasiKondisiAset::create([
@@ -77,7 +88,7 @@ public function riwayatLengkap(Request $request)
             'jenis_aset_uji' => $request->jenis_aset_uji,
             'intensitas_penggunaan_uji' => $request->intensitas_penggunaan_uji,
             'usia_aset_uji' => $usiaAset,
-            'nilai_k' => 3,
+            'nilai_k' => $nilaiK,
             'hasil_klasifikasi' => $hasil['hasil_klasifikasi'],
             'tanggal_klasifikasi' => now(),
         ]);

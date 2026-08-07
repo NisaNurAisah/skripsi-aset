@@ -7,13 +7,19 @@
     <a href="/klasifikasi/riwayat-lengkap" class="btn btn-outline-success"><i class="bi bi-clock-history"></i> Riwayat Lengkap</a>
 </div>
 
+@if (session('error'))
+    <div class="alert alert-warning">
+        <i class="bi bi-exclamation-triangle-fill"></i> {{ session('error') }}
+    </div>
+@endif
+
 <div class="card stat-card p-4 mb-4">
     <h6 class="fw-bold mb-3">Input Data Inventaris</h6>
     <form action="/klasifikasi" method="POST" class="row g-3">
         @csrf
         <div class="col-md-4">
             <label class="form-label">Nama Inventaris</label>
-            <input type="text" name="nama_aset_uji" class="form-control" placeholder="" required>
+            <input type="text" name="nama_aset_uji" class="form-control" placeholder="" value="{{ old('nama_aset_uji') }}" required>
         </div>
         <div class="col-md-4">
             <label class="form-label">Jenis Inventaris</label>

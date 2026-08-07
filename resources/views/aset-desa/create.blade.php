@@ -4,26 +4,45 @@
 @section('content')
 <h3 class="fw-bold mb-4 text-center">Tambah Data Aset</h3>
 
+@if ($errors->any())
+    <div class="alert alert-danger mx-auto" style="max-width:600px;">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="card stat-card p-4 mx-auto" style="max-width:600px;">
     <form action="/data-aset-desa" method="POST" class="row g-3" enctype="multipart/form-data">
         @csrf
         <div class="col-md-6">
             <label class="form-label">Kode Aset</label>
-            <input type="text" name="kode_aset" class="form-control" required>
+            <input type="text" name="kode_aset" class="form-control @error('kode_aset') is-invalid @enderror" value="{{ old('kode_aset') }}">
+            @error('kode_aset')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-md-6">
             <label class="form-label">Nama Aset</label>
-            <input type="text" name="nama_aset" class="form-control" required>
+            <input type="text" name="nama_aset" class="form-control @error('nama_aset') is-invalid @enderror" value="{{ old('nama_aset') }}">
+            @error('nama_aset')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-md-6">
             <label class="form-label">Jenis Aset</label>
-            <select name="jenis_aset" id="jenis_aset" class="form-select" required>
-                <option value="Tanah" {{ request('jenis_aset') == 'Tanah' ? 'selected' : '' }}>Tanah</option>
-                <option value="Jalan dan Irigasi" {{ request('jenis_aset') == 'Jalan dan Irigasi' ? 'selected' : '' }}>Jalan dan Irigasi</option>
-                <option value="Bangunan" {{ request('jenis_aset') == 'Bangunan' ? 'selected' : '' }}>Bangunan</option>
-                <option value="Sawah" {{ request('jenis_aset') == 'Sawah' ? 'selected' : '' }}>Sawah</option>
-                <option value="Kendaraan" {{ request('jenis_aset') == 'Kendaraan' ? 'selected' : '' }}>Kendaraan</option>
+            <select name="jenis_aset" id="jenis_aset" class="form-select @error('jenis_aset') is-invalid @enderror">
+                <option value="Tanah" {{ old('jenis_aset', request('jenis_aset')) == 'Tanah' ? 'selected' : '' }}>Tanah</option>
+                <option value="Jalan dan Irigasi" {{ old('jenis_aset', request('jenis_aset')) == 'Jalan dan Irigasi' ? 'selected' : '' }}>Jalan dan Irigasi</option>
+                <option value="Bangunan" {{ old('jenis_aset', request('jenis_aset')) == 'Bangunan' ? 'selected' : '' }}>Bangunan</option>
+                <option value="Sawah" {{ old('jenis_aset', request('jenis_aset')) == 'Sawah' ? 'selected' : '' }}>Sawah</option>
+                <option value="Kendaraan" {{ old('jenis_aset', request('jenis_aset')) == 'Kendaraan' ? 'selected' : '' }}>Kendaraan</option>
             </select>
+            @error('jenis_aset')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-md-6">
             <label class="form-label">Cara Perolehan</label>
@@ -42,11 +61,17 @@
         </div>
         <div class="col-md-6">
             <label class="form-label">Tahun Perolehan</label>
-            <input type="number" name="tahun_perolehan" class="form-control" placeholder="Contoh: 2020" min="1900" max="{{ date('Y') }}" required>
+            <input type="number" name="tahun_perolehan" class="form-control @error('tahun_perolehan') is-invalid @enderror" value="{{ old('tahun_perolehan') }}" placeholder="Contoh: 2020" min="1900" max="{{ date('Y') }}">
+            @error('tahun_perolehan')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-md-6">
             <label class="form-label">Nilai Perolehan (Rp)</label>
-            <input type="number" name="nilai_perolehan" step="0.01" class="form-control" required>
+            <input type="number" name="nilai_perolehan" step="0.01" class="form-control @error('nilai_perolehan') is-invalid @enderror" value="{{ old('nilai_perolehan') }}">
+            @error('nilai_perolehan')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="col-md-12"><hr class="my-1"><small class="text-muted">Detail Tambahan (sesuai jenis aset)</small></div>

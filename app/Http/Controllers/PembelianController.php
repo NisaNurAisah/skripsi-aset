@@ -34,24 +34,43 @@ class PembelianController extends Controller
         ]);
 
         DB::transaction(function () use ($request) {
-            $nilaiPerolehanPerUnit = $request->total_harga / $request->jumlah_pembelian;
+            $nilaiPerolehanBaru = $request->total_harga / $request->jumlah_pembelian;
 
-            $dataAset = [
-                'nama_aset' => $request->nama_aset,
-                'id_lokasi' => $request->id_lokasi,
-                'jenis_aset' => $request->jenis_aset,
-                'intensitas_penggunaan' => $request->intensitas_penggunaan,
-                'tahun_perolehan' => $request->tanggal_pembelian,
-                'nilai_perolehan' => $nilaiPerolehanPerUnit,
-                'jumlah_aset' => $request->jumlah_pembelian,
-                'status_aset' => 'Aktif',
-            ];
+            $asetExisting = DataAset::where('nama_aset', $request->nama_aset)
+                ->where('jenis_aset', $request->jenis_aset)
+                ->first();
 
-            if ($request->hasFile('gambar_aset')) {
-                $dataAset['gambar_aset'] = $request->file('gambar_aset')->store('aset', 'public');
+            if ($asetExisting) {
+                $jumlahLama = $asetExisting->jumlah_aset;
+                $jumlahBaru = $request->jumlah_pembelian;
+                $nilaiLama = $asetExisting->nilai_perolehan;
+
+                $nilaiRataRata = (($jumlahLama * $nilaiLama) + ($jumlahBaru * $nilaiPerolehanBaru)) / ($jumlahLama + $jumlahBaru);
+
+                $asetExisting->update([
+                    'jumlah_aset' => $jumlahLama + $jumlahBaru,
+                    'nilai_perolehan' => $nilaiRataRata,
+                ]);
+
+                $aset = $asetExisting;
+            } else {
+                $dataAset = [
+                    'nama_aset' => $request->nama_aset,
+                    'id_lokasi' => $request->id_lokasi,
+                    'jenis_aset' => $request->jenis_aset,
+                    'intensitas_penggunaan' => $request->intensitas_penggunaan,
+                    'tahun_perolehan' => $request->tanggal_pembelian,
+                    'nilai_perolehan' => $nilaiPerolehanBaru,
+                    'jumlah_aset' => $request->jumlah_pembelian,
+                    'status_aset' => 'Aktif',
+                ];
+
+                if ($request->hasFile('gambar_aset')) {
+                    $dataAset['gambar_aset'] = $request->file('gambar_aset')->store('aset', 'public');
+                }
+
+                $aset = DataAset::create($dataAset);
             }
-
-            $aset = DataAset::create($dataAset);
 
             Pembelian::create([
                 'id_aset' => $aset->id_aset,
@@ -61,7 +80,7 @@ class PembelianController extends Controller
             ]);
         });
 
-        return redirect('/pembelian')->with('success', 'Pembelian berhasil dicatat dan aset baru berhasil ditambahkan ke Data Aset.');
+        return redirect('/pembelian')->with('success', 'Pembelian berhasil dicatat dan stok Data Inventaris diperbarui.');
     }
 
     public function destroy($id_pembelian)
