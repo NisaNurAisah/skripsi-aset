@@ -2,9 +2,9 @@
 @section('title', 'Tambah Pengguna')
 
 @section('content')
-<h3 class="fw-bold mb-4">Tambah Data Pengguna</h3>
+<h3 class="fw-bold mb-4 text-center">Tambah Data Pengguna</h3>
 
-<div class="card stat-card p-4" style="max-width:500px;">
+<div class="card stat-card p-4 mx-auto" style="max-width:500px;">
     <form action="/data-pengguna" method="POST">
         @csrf
         <div class="mb-3">

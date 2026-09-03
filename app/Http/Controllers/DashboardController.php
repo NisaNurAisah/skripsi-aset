@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataAset;
+use App\Models\AsetDesa;
 use App\Models\KlasifikasiKondisiAset;
 
 class DashboardController extends Controller
@@ -23,9 +24,18 @@ class DashboardController extends Controller
         ->limit(5)
         ->get();
 
+        // Ringkasan Aset Desa
+        $totalAsetDesa = AsetDesa::count();
+        $totalNilaiAsetDesa = AsetDesa::sum('nilai_perolehan');
+        $asetDesaPerJenis = AsetDesa::selectRaw('jenis_aset, COUNT(*) as jumlah')
+            ->groupBy('jenis_aset')
+            ->orderBy('jumlah', 'desc')
+            ->get();
+
         return view('dashboard', compact(
             'totalAset', 'kondisiBaik', 'rusakRingan', 'rusakBerat',
-            'aktivitasTerbaru'
+            'aktivitasTerbaru',
+            'totalAsetDesa', 'totalNilaiAsetDesa', 'asetDesaPerJenis'
         ));
     }
 }

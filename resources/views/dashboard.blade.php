@@ -34,6 +34,44 @@
 <div class="row g-3 mb-4">
     <div class="col-md-12">
         <div class="card stat-card p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6 class="fw-bold mb-0">Ringkasan Aset Desa</h6>
+                <a href="/data-aset-desa" class="btn btn-sm btn-outline-success">Lihat Semua</a>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="border rounded p-3 text-center h-100">
+                        <div class="text-muted">Total Aset Desa</div>
+                        <div class="fs-3 fw-bold">{{ $totalAsetDesa }}</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border rounded p-3 text-center h-100">
+                        <div class="text-muted">Total Nilai Perolehan</div>
+                        <div class="fs-5 fw-bold text-success">Rp {{ number_format($totalNilaiAsetDesa, 0, ',', '.') }}</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="border rounded p-3 h-100">
+                        <div class="text-muted mb-2">Jenis Aset</div>
+                        @forelse($asetDesaPerJenis as $j)
+                        <div class="d-flex justify-content-between small">
+                            <span>{{ $j->jenis_aset }}</span>
+                            <span class="fw-bold">{{ $j->jumlah }}</span>
+                        </div>
+                        @empty
+                        <div class="text-muted small">Belum ada data.</div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-12">
+        <div class="card stat-card p-3">
             <h6 class="fw-bold mb-3">Distribusi Kondisi Inventaris</h6>
             <div style="height: 250px;">
                 <canvas id="chartKondisi"></canvas>

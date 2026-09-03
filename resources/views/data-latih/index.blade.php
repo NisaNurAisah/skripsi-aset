@@ -23,7 +23,7 @@
 
 <div class="card stat-card p-3 mb-3">
     <form action="/data-latih" method="GET">
-        <input type="text" name="search" class="form-control" placeholder="Cari jenis aset... (tekan Enter)" value="{{ request('search') }}">
+        <input type="text" name="search" class="form-control" placeholder="Cari jenis inventaris... " value="{{ request('search') }}">
     </form>
 </div>
 

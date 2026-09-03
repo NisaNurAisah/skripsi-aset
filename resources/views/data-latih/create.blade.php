@@ -12,7 +12,7 @@
     <div class="mb-3">
         <div class="btn-group w-100" role="group">
             <input type="radio" class="btn-check" name="modeToggle" id="modeAset" checked onclick="toggleMode('aset')">
-            <label class="btn btn-outline-success" for="modeAset">Ambil dari Data Aset</label>
+            <label class="btn btn-outline-success" for="modeAset">Ambil dari Data Inventaris</label>
 
             <input type="radio" class="btn-check" name="modeToggle" id="modeManual" onclick="toggleMode('manual')">
             <label class="btn btn-outline-success" for="modeManual">Input Manual</label>
@@ -24,7 +24,7 @@
         <input type="hidden" name="mode" id="modeInput" value="aset">
 
         <div id="fieldAset" class="col-md-12">
-            <label class="form-label">Pilih Aset</label>
+            <label class="form-label">Pilih Inventaris</label>
             <select name="id_aset" class="form-select">
                 @forelse($dataAset as $a)
                     <option value="{{ $a->id_aset }}">{{ $a->nama_aset }} ({{ $a->jenis_aset }}) — {{ $a->kondisi_aset ?? 'Belum diklasifikasi' }}</option>
@@ -32,12 +32,12 @@
                     <option value="">Belum ada data aset bergerak</option>
                 @endforelse
             </select>
-            <small class="text-muted">Jenis Aset, Intensitas Penggunaan, Usia Aset, dan Label Kondisi akan otomatis diambil dari data aset ini.</small>
+            <small class="text-muted">Jenis Inventaris, Intensitas Penggunaan, Usia Inventaris, dan Label Kondisi akan otomatis diambil dari data aset ini.</small>
         </div>
 
         <div id="fieldManual" class="col-md-12 row g-3" style="display:none;">
             <div class="col-md-6">
-                <label class="form-label">Jenis Aset</label>
+                <label class="form-label">Jenis Inventaris</label>
                 <select name="jenis_aset" class="form-select">
                     <option value="Elektronik">Elektronik</option>
                     <option value="Furnitur">Furnitur</option>
@@ -54,7 +54,7 @@
                 </select>
             </div>
             <div class="col-md-6">
-                <label class="form-label">Usia Aset (tahun)</label>
+                <label class="form-label">Usia Inventaris (tahun)</label>
                 <input type="number" name="usia_aset" class="form-control">
             </div>
             <div class="col-md-6">

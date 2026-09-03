@@ -82,7 +82,6 @@
             <thead class="table-light">
                 <tr>
                     <th>No.</th>
-                    <th>Kode</th>
                     <th>Nama Inventaris</th>
                     <th>Jenis Inventaris</th>
                     <th>Lokasi</th>
@@ -95,7 +94,6 @@
                 @forelse($dataAset as $aset)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $aset->kode_aset }}</td>
                     <td>{{ $aset->nama_aset }}</td>
                     <td>{{ $aset->jenis_aset }}</td>
                     <td>{{ $aset->lokasi->nama_lokasi ?? '-' }}</td>
@@ -104,7 +102,7 @@
                     <td>{{ $aset->kondisi_aset ?? 'Belum diketahui' }}</td>
                 </tr>
                 @empty
-                <tr><td colspan="8" class="text-center text-muted">Tidak ada data sesuai filter.</td></tr>
+                <tr><td colspan="7" class="text-center text-muted">Tidak ada data sesuai filter.</td></tr>
                 @endforelse
             </tbody>
         </table>
