@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataLatih;
 use Illuminate\Http\Request;
 use App\Models\DataAset;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DataLatihController extends Controller
 {
@@ -146,5 +147,26 @@ class DataLatihController extends Controller
     }
 
     return redirect('/data-latih')->with('success', "Semua data latih lama sudah dihapus. Berhasil generate ulang {$jumlahBerhasil} data latih dari Data Aset.");
+}
+
+public function downloadPdf(Request $request)
+{
+    $query = DataLatih::query();
+
+    if ($request->search) {
+        $query->where('jenis_aset', 'like', '%' . $request->search . '%');
+    }
+
+    $dataLatih = $query->get();
+
+    $summary = [
+        'total' => $dataLatih->count(),
+        'baik' => $dataLatih->where('label_kondisi', 'Baik')->count(),
+        'rusak_ringan' => $dataLatih->where('label_kondisi', 'Rusak Ringan')->count(),
+        'rusak_berat' => $dataLatih->where('label_kondisi', 'Rusak Berat')->count(),
+    ];
+
+    $pdf = Pdf::loadView('data-latih.pdf', compact('dataLatih', 'summary'));
+    return $pdf->download('Data-Latih-KNN-' . now()->format('Ymd') . '.pdf');
 }
 }

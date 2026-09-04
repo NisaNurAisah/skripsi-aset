@@ -30,16 +30,16 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($dataAset as $i => $aset)
+            @foreach($dataInventaris as $i => $inventaris)
             <tr>
                 <td>{{ $i + 1 }}</td>
-                <td>{{ $aset->nama_aset }}</td>
-                <td>{{ $aset->jenis_aset }}</td>
-                <td>{{ $aset->merk ?? '-' }}</td>
-                <td>{{ $aset->lokasi->nama_lokasi ?? '-' }}</td>
-                <td>{{ $aset->jumlah_aset }}</td>
-                <td>{{ \Carbon\Carbon::parse($aset->tahun_perolehan)->format('Y') }}</td>
-                <td>{{ $aset->kondisi_aset ?? 'Belum diketahui' }}</td>
+                <td>{{ $inventaris->nama_inventaris }}</td>
+                <td>{{ $inventaris->jenis_inventaris }}</td>
+                <td>{{ $inventaris->merk ?? '-' }}</td>
+                <td>{{ $inventaris->lokasi->nama_lokasi ?? '-' }}</td>
+                <td>{{ $inventaris->jumlah_inventaris }}</td>
+                <td>{{ \Carbon\Carbon::parse($inventaris->tahun_perolehan)->format('Y') }}</td>
+                <td>{{ $inventaris->kondisi_inventaris ?? 'Belum diketahui' }}</td>
             </tr>
             @endforeach
         </tbody>

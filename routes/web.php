@@ -3,11 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DataAsetController;
+use App\Http\Controllers\DataInventarisController;
 use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\DataLatihController;
 use App\Http\Controllers\PerbaikanController;
-use App\Http\Controllers\PenghapusanController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PenggunaController;
@@ -31,8 +30,6 @@ Route::middleware('checklogin')->group(function () {
     Route::post('/laporan/cetak', [LaporanController::class, 'cetak']);
     Route::get('/laporan/download-pdf', [LaporanController::class, 'downloadPdf']);
 
-    Route::get('/penghapusan', [PenghapusanController::class, 'index']);
-
     Route::get('/profile', [ProfileSettingController::class, 'edit']);
     Route::put('/profile', [ProfileSettingController::class, 'updateInfo']);
     Route::put('/profile/password', [ProfileSettingController::class, 'updatePassword']);
@@ -41,8 +38,6 @@ Route::middleware('checklogin')->group(function () {
 
     // Setujui/Tolak - hanya Kepala Desa
     Route::middleware('kepaladesa')->group(function () {
-        Route::post('/penghapusan/{id_penghapusan}/approve', [PenghapusanController::class, 'approve']);
-        Route::post('/penghapusan/{id_penghapusan}/reject', [PenghapusanController::class, 'reject']);
         Route::post('/perbaikan/{id_perbaikan}/approve', [PerbaikanController::class, 'approve']);
         Route::post('/perbaikan/{id_perbaikan}/reject', [PerbaikanController::class, 'reject']);
     });
@@ -54,18 +49,19 @@ Route::middleware('checklogin')->group(function () {
         Route::post('/data-pengguna', [PenggunaController::class, 'store']);
         Route::delete('/data-pengguna/{id_pengguna}', [PenggunaController::class, 'destroy']);
 
-        // Data Aset
-        Route::get('/data-aset', [DataAsetController::class, 'index']);
-        Route::get('/data-aset/create', [DataAsetController::class, 'create']);
-        Route::post('/data-aset', [DataAsetController::class, 'store']);
-        Route::get('/data-aset/{id_aset}/edit', [DataAsetController::class, 'edit']);
-        Route::put('/data-aset/{id_aset}', [DataAsetController::class, 'update']);
-        Route::delete('/data-aset/{id_aset}', [DataAsetController::class, 'destroy']);
-        Route::get('/data-aset/download-pdf', [DataAsetController::class, 'downloadPdf']);
+        // Data Inventaris
+        Route::get('/data-inventaris', [DataInventarisController::class, 'index']);
+        Route::get('/data-inventaris/create', [DataInventarisController::class, 'create']);
+        Route::post('/data-inventaris', [DataInventarisController::class, 'store']);
+        Route::get('/data-inventaris/{id_inventaris}/edit', [DataInventarisController::class, 'edit']);
+        Route::put('/data-inventaris/{id_inventaris}', [DataInventarisController::class, 'update']);
+        Route::delete('/data-inventaris/{id_inventaris}', [DataInventarisController::class, 'destroy']);
+        Route::get('/data-inventaris/download-pdf', [DataInventarisController::class, 'downloadPdf']);
 
         // Data Latih
         Route::get('/data-latih', [DataLatihController::class, 'index']);
         Route::get('/data-latih/create', [DataLatihController::class, 'create']);
+        Route::get('/data-latih/download-pdf', [DataLatihController::class, 'downloadPdf']);
         Route::post('/data-latih', [DataLatihController::class, 'store']);
         Route::post('/data-latih/generate-otomatis', [DataLatihController::class, 'generateOtomatis']);
         Route::post('/data-latih/reset-generate', [DataLatihController::class, 'resetGenerate']);
@@ -84,11 +80,6 @@ Route::middleware('checklogin')->group(function () {
         Route::get('/perbaikan/create', [PerbaikanController::class, 'create']);
         Route::post('/perbaikan', [PerbaikanController::class, 'store']);
         Route::delete('/perbaikan/{id_perbaikan}', [PerbaikanController::class, 'destroy']);
-
-        // Penghapusan
-        Route::get('/penghapusan/create', [PenghapusanController::class, 'create']);
-        Route::post('/penghapusan', [PenghapusanController::class, 'store']);
-        Route::delete('/penghapusan/{id_penghapusan}', [PenghapusanController::class, 'destroy']);
 
         // Pembelian
         Route::get('/pembelian', [PembelianController::class, 'index']);

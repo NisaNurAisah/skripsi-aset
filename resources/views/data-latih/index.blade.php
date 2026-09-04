@@ -19,6 +19,10 @@
         </form>
         <a href="/data-latih/create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Tambah Data Latih</a>
     </div>
+
+    <a href="/data-latih/download-pdf{{ request('search') ? '?search=' . request('search') : '' }}" class="btn btn-outline-secondary">
+    <i class="bi bi-file-earmark-pdf"></i> Download PDF
+</a>
 </div>
 
 <div class="card stat-card p-3 mb-3">

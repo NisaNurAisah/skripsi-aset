@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title', 'Sistem Inventaris Aset Desa')</title>
+    <title>@yield('title', 'Sistem Inventaris Desa')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -69,8 +69,8 @@
 
                 @if(session('role') == 'Admin')
                 <a class="nav-link {{ request()->is('data-pengguna*') ? 'active' : '' }}" href="/data-pengguna"><i class="bi bi-people me-2"></i>Data Pengguna</a>
-    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#submenuAset" role="button" aria-expanded="{{ request()->is('data-aset-desa*','pengadaan-aset*','laporan-aset*') ? 'true' : 'false' }}">
-        <span><i class="bi bi-geo-alt me-2"></i>Kelola Data Aset</span>
+    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#submenuInventaris" role="button" aria-expanded="{{ request()->is('data-inventaris-desa*','pengadaan-inventaris*','laporan-inventaris*') ? 'true' : 'false' }}">
+        <span><i class="bi bi-geo-alt me-2"></i>Kelola Data Inventaris</span>
         <i class="bi bi-chevron-down"></i>
     </a>
     <div class="collapse submenu {{ request()->is('data-aset-desa*','pengadaan-aset*','laporan-aset*') ? 'show' : '' }}" id="submenuAset">
@@ -86,16 +86,15 @@
                     <span><i class="bi bi-box me-2"></i>Kelola Data Inventaris</span>
                     <i class="bi bi-chevron-down"></i>
                 </a>
-                <div class="collapse submenu {{ request()->is('data-aset','data-aset/*','data-latih*','klasifikasi*','perbaikan*','penghapusan*','pembelian*','laporan') ? 'show' : '' }}" id="submenuInventaris">
+                <div class="collapse submenu {{ request()->is('data-inventaris','data-inventaris/*','data-latih*','klasifikasi*','perbaikan*','pembelian*','laporan') ? 'show' : '' }}" id="submenuInventaris">
                     <nav class="nav flex-column">
                         @if(session('role') == 'Admin')
-                        <a class="nav-link {{ request()->is('data-aset','data-aset/*') ? 'active' : '' }}" href="/data-aset">Data Inventaris</a>
+                        <a class="nav-link {{ request()->is('data-inventaris','data-inventaris/*') ? 'active' : '' }}" href="/data-inventaris">Data Inventaris</a>
                         <a class="nav-link {{ request()->is('data-latih*') ? 'active' : '' }}" href="/data-latih">Data Latih KNN</a>
                         <a class="nav-link {{ request()->is('klasifikasi*') ? 'active' : '' }}" href="/klasifikasi">Klasifikasi Kondisi</a>
                         <a class="nav-link {{ request()->is('pembelian*') ? 'active' : '' }}" href="/pembelian">Pembelian Inventaris</a>
                         @endif
                         <a class="nav-link {{ request()->is('perbaikan*') ? 'active' : '' }}" href="/perbaikan">Perbaikan Inventaris</a>
-                        <a class="nav-link {{ request()->is('penghapusan*') ? 'active' : '' }}" href="/penghapusan">Penghapusan Inventaris</a>
                          <a class="nav-link {{ request()->is('laporan') ? 'active' : '' }}" href="/laporan">Laporan Inventaris</a>
                     </nav>
                 </div>

@@ -15,15 +15,15 @@
 @endif
 
 <div class="card stat-card p-4 mx-auto" style="max-width:600px;">
-    <form action="/data-aset" method="POST" class="row g-3" enctype="multipart/form-data">
+    <form action="/data-inventaris" method="POST" class="row g-3" enctype="multipart/form-data">
         @csrf
         <div class="col-md-6">
             <label class="form-label">Nama Inventaris</label>
-            <input type="text" name="nama_aset" class="form-control" required>
+            <input type="text" name="nama_inventaris" class="form-control" required>
         </div>
         <div class="col-md-6">
             <label class="form-label">Jenis Inventaris</label>
-            <select name="jenis_aset" class="form-select" required>
+            <select name="jenis_inventaris" class="form-select" required>
                 <option value="Elektronik">Elektronik</option>
                 <option value="Furnitur">Furnitur</option>
                 <option value="Peralatan Kantor">Peralatan Kantor</option>
@@ -60,11 +60,11 @@
         </div>
         <div class="col-md-6">
             <label class="form-label">Jumlah Inventaris</label>
-            <input type="number" name="jumlah_aset" value="1" class="form-control" required>
+            <input type="number" name="jumlah_inventaris" value="1" class="form-control" required>
         </div>
         <div class="col-md-6">
             <label class="form-label">Kondisi</label>
-            <select name="kondisi_aset" class="form-select">
+            <select name="kondisi_inventaris" class="form-select">
                 <option value="">Belum diketahui</option>
                 <option value="Baik">Baik</option>
                 <option value="Rusak Ringan">Rusak Ringan</option>
@@ -73,11 +73,11 @@
         </div>
         <div class="col-md-12">
             <label class="form-label">Foto Inventaris</label>
-            <input type="file" name="gambar_aset" class="form-control" accept="image/*">
+            <input type="file" name="gambar_inventaris" class="form-control" accept="image/*">
         </div>
         <div class="col-md-12">
             <button type="submit" class="btn btn-success">Simpan</button>
-            <a href="/data-aset" class="btn btn-outline-secondary">Batal</a>
+            <a href="/data-inventaris" class="btn btn-outline-secondary">Batal</a>
         </div>
     </form>
 </div>
